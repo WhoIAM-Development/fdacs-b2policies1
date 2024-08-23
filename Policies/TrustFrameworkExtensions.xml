@@ -272,15 +272,17 @@
     <DisplayName>Secondary One-time password</DisplayName>
     <DataType>string</DataType>
   </ClaimType>
-  <ClaimType Id="emailRequestBody">
-    <DisplayName>SendGrid request body</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
+ 
   <ClaimType Id="VerificationCode">
     <DisplayName>Secondary Verification Code</DisplayName>
     <DataType>string</DataType>
     <UserHelpText>Enter your email verification code</UserHelpText>
     <UserInputType>TextBox</UserInputType>
+  </ClaimType>
+
+  <ClaimType Id="logonIdentifier">
+    <DisplayName>User name or email address that the user can use to sign in</DisplayName>
+    <DataType>string</DataType>
   </ClaimType>
   
 </ClaimsSchema>
@@ -308,24 +310,6 @@
       </InputClaims>
       <OutputClaims>
         <OutputClaim ClaimTypeReferenceId="dfp_botScore_string" TransformationClaimType="outputClaim" />
-      </OutputClaims>
-    </ClaimsTransformation>
-
-    <ClaimsTransformation Id="GenerateEmailRequestBody" TransformationMethod="GenerateJson">
-      <InputClaims>
-        <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="personalizations.0.to.0.email" />
-        <InputClaim ClaimTypeReferenceId="otp" TransformationClaimType="personalizations.0.dynamic_template_data.otp" />
-        <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="personalizations.0.dynamic_template_data.email" />
-      </InputClaims>
-      <InputParameters>
-        <!-- Update the template_id value with the ID of your SendGrid template. -->
-        <InputParameter Id="template_id" DataType="string" Value="{Settings:SendGridCodeEmailTemplateId}"/>
-        <InputParameter Id="from.email" DataType="string" Value="{Settings:SendGridFromEmail}"/>
-        <!-- Update with a subject line appropriate for your organization. -->
-        <InputParameter Id="personalizations.0.dynamic_template_data.subject" DataType="string" Value="Secure Access - Washington - account email verification code"/>
-      </InputParameters>
-      <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="emailRequestBody" TransformationClaimType="outputClaim"/>
       </OutputClaims>
     </ClaimsTransformation>
 
