@@ -351,6 +351,14 @@
       <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}</LoadUri>
     </ContentDefinition>
 
+    <ContentDefinition Id="api.localaccountpasswordreset">
+      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}</LoadUri>
+    </ContentDefinition>
+
+    <ContentDefinition Id="api.localaccountsignin">
+      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}</LoadUri>
+    </ContentDefinition>
+
   </ContentDefinitions>
 
   <DisplayControls>
@@ -1326,8 +1334,179 @@
         </OrchestrationSteps>
         <ClientDefinition ReferenceId="DefaultWeb" />
       </UserJourney>
+      <UserJourney Id="ProfileEdit-Custom">
+        <OrchestrationSteps>
+  
+          <!-- Track that we have received an authentication request -->
+          <OrchestrationStep Order="1" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="2" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
+            <ClaimsProviderSelections>
+              <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
+              <ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
+            </ClaimsProviderSelections>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="3" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="FacebookExchange" TechnicalProfileReferenceId="StartFacebookFlow" />
+              <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="4" Type="ClaimsExchange">
+            <Preconditions>
+              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+                <Value>selectedIdp</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackIdpAuthenticationInitiate" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationInitiate" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+         <OrchestrationStep Order="5" Type="ClaimsExchange">
+            <Preconditions>
+              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+                <Value>isFacebookAuthFlow</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <ClaimsExchanges>
+              <ClaimsExchange Id="FacebookAuthExchange" TechnicalProfileReferenceId="Facebook-OAUTH" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="6" Type="ClaimsExchange">
+            <Preconditions>
+              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+                <Value>selectedIdp</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackIdpAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationComplete" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="7" Type="ClaimsExchange">
+            <Preconditions>
+              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+                <Value>authenticationSource</Value>
+                <Value>localAccountAuthentication</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <ClaimsExchanges>
+              <ClaimsExchange Id="AADUserRead" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="8" Type="ClaimsExchange">
+            <Preconditions>
+              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+                <Value>authenticationSource</Value>
+                <Value>socialIdpAuthentication</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <ClaimsExchanges>
+              <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <!-- Track that the authentication step is completed -->
+          <OrchestrationStep Order="9" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+
+          <OrchestrationStep Order="10" Type="InvokeSubJourney">
+            <Preconditions>
+              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+                <Value>objectIdFromSession</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+                <Value>isPasswordResetFlow</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>            
+              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+                <Value>authenticationSource</Value>
+                <Value>socialIdpAuthentication</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <JourneyList>
+              <Candidate SubJourneyReferenceId="DFP-Verification" />
+            </JourneyList>
+          </OrchestrationStep>
+  
+          <!-- Track that the mutifactor authentication step is initiated -->
+          <OrchestrationStep Order="11" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <!-- If the user ever stepped up to use 2FA, profile update must verify this because the user will be able to change
+            their sign in email address or strong authentication email here. This guards against scenarios where a user's
+            password is stolen, the attacker can change the email addresses leaving no way for the user to recover their account.
+            By requiring 2FA, stolen passwords cannot be used to take over the account completely. -->
+          <OrchestrationStep Order="12" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="PhoneFactor" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <!-- Track that the mutifactor authentication step is completed -->
+          <OrchestrationStep Order="13" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <!-- Track that the profile edit step is initiated -->
+          <OrchestrationStep Order="14" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackProfileEditInitiate" TechnicalProfileReferenceId="AzureInsights-ProfileEditInitiate" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="15" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <!-- Track that the profile edit step is completed -->
+          <OrchestrationStep Order="16" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackProfileEditComplete" TechnicalProfileReferenceId="AzureInsights-ProfileEditComplete" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+          <OrchestrationStep Order="17" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+  
+          <!-- Track that we have successfully sent a token -->
+          <OrchestrationStep Order="18" Type="ClaimsExchange">
+            <ClaimsExchanges>
+              <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
+            </ClaimsExchanges>
+          </OrchestrationStep>
+  
+        </OrchestrationSteps>
+        <ClientDefinition ReferenceId="DefaultWeb" />
+      </UserJourney>
+  
 	
-</UserJourneys>
+    </UserJourneys>
 <SubJourneys>
   <SubJourney Id="SignUp-Custom" Type="Call">
     <OrchestrationSteps>
