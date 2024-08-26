@@ -1161,7 +1161,7 @@
             </ClaimsExchanges>
           </OrchestrationStep>
     
-          <!-- Phone verification: If MFA is not required, the next three steps (#5-#7) should be removed.
+          <!-- Phone verification: If MFA is not required, the next three steps (#16-#18) should be removed.
                This step checks whether there's a phone number on record,  for the user. If found, then the user is challenged to verify it. -->
           <OrchestrationStep Order="16" Type="ClaimsExchange">
             <Preconditions>
@@ -1169,10 +1169,10 @@
                 <Value>isActiveMFASession</Value>
                 <Action>SkipThisOrchestrationStep</Action>
               </Precondition>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <!-- <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>strongAuthenticationPhoneNumber</Value>
                 <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
+              </Precondition> -->
                <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>isPasswordResetFlow</Value>
                 <Action>SkipThisOrchestrationStep</Action>

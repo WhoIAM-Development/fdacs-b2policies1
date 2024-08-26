@@ -32,6 +32,10 @@
         <OutputClaim ClaimTypeReferenceId="surname" />
         <OutputClaim ClaimTypeReferenceId="signInNames.emailAddress" PartnerClaimType="email" />
         <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="dfp_botScore_string" PartnerClaimType="dfp_botScore"/>
+        <OutputClaim ClaimTypeReferenceId="dfp_riskScore_string" PartnerClaimType="dfp_riskScore"/>
+        <OutputClaim ClaimTypeReferenceId="dfp_merchantRuleDecision" />
+        <OutputClaim ClaimTypeReferenceId="dfp_DeviceCountryCode" />
         <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
         <OutputClaim ClaimTypeReferenceId="identityProvider" />
         <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
