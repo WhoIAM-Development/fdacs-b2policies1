@@ -1,14 +1,14 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: CI/CD
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main", "dev" ,"QA" ]
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: [ "main", "dev" ,"QA" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -60,10 +60,18 @@ jobs:
           ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
           AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
           AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
-          AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+     #    AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
           DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
           ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+          FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+          FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+          DFPInstanceId: ${{ vars.DFPINSTANCEID }}
           UIBaseUrl: ${{ vars.UIBASEURL }}
+          IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+          IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+          IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+          IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+          IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
 
       # - name: Archive artifacts
       #   uses: actions/upload-artifact@v3
@@ -76,10 +84,75 @@ jobs:
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
         with:
           folder: "Policies"
-          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
           tenant: ${{ vars.TENANT }}
           clientId: ${{ vars.CLIENTID }}
           clientSecret: ${{ secrets.clientSecret }}
+
+  TEST:
+    # The type of runner that the job will run on
+    if: github.ref_name == 'QA'
+    runs-on: ubuntu-latest
+    environment: QA
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      # - uses: lindluni/actions-variable-groups@v1.0.0
+      #   with:
+      #     org: WhoIAM-Development
+      #     repo: WhoIAmPolicyDeployment
+      #     groups: |
+      #       Variables/DevVars.yml
+      # - name: Print Environment
+      #   run: env | sort
+      
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{Settings:'
+          tokenSuffix: '}'
+          files: '["**/*.xml"]'
+        env:
+          PolicySet: ${{ vars.POLICYSET }}
+          TenantShort: ${{ vars.TENANTSHORT }}
+          TenantGuid: ${{ vars.TENANTGUID }}
+          AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+          AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+          ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+          ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+          AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+          AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+     #    AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+          DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+          ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+          FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+          FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+          DFPInstanceId: ${{ vars.DFPINSTANCEID }}
+          UIBaseUrl: ${{ vars.UIBASEURL }}
+          IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+          IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+          IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+          IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+          IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
+
+      # - name: Archive artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
+      #     path: |
+      #       Policies/*.xml
+
+      - name: 'Upload TrustFrameworkBase Policy'
+        uses: azure-ad-b2c/deploy-trustframework-policy@v3
+        with:
+          folder: "Policies"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
+          tenant: ${{ vars.TENANT }}
+          clientId: ${{ vars.CLIENTID }}
+          clientSecret: ${{ secrets.clientSecret }}
+
 
   STAGING:
       # The type of runner that the job will run on
@@ -116,10 +189,18 @@ jobs:
             ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
             AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
             AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
-            AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+       #    AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
             DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
             ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+            FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+            FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+            DFPInstanceId: ${{ vars.DFPINSTANCEID }}
             UIBaseUrl: ${{ vars.UIBASEURL }}
+            IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+            IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+            IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+            IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+            IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
 
         # - name: Archive artifacts
         #   uses: actions/upload-artifact@v3
@@ -132,7 +213,7 @@ jobs:
           uses: azure-ad-b2c/deploy-trustframework-policy@v3
           with:
             folder: "Policies"
-            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml"
+            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
             tenant: ${{ vars.TENANT }}
             clientId: ${{ vars.CLIENTID }}
             clientSecret: ${{ secrets.clientSecret }}
@@ -172,11 +253,18 @@ jobs:
             ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
             AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
             AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
-            AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+        #   AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
             DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
             ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+            FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+            FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+            DFPInstanceId: ${{ vars.DFPINSTANCEID }}
             UIBaseUrl: ${{ vars.UIBASEURL }}
-
+            IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+            IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+            IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+            IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+            IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
         # - name: Archive artifacts
         #   uses: actions/upload-artifact@v3
         #   with:
@@ -188,7 +276,7 @@ jobs:
           uses: azure-ad-b2c/deploy-trustframework-policy@v3
           with:
             folder: "Policies"
-            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml"
+            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
             tenant: ${{ vars.TENANT }}
             clientId: ${{ vars.CLIENTID }}
             clientSecret: ${{ secrets.clientSecret }}
