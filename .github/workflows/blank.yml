@@ -1,0 +1,194 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# env:
+#   clientId: abdf47fe-4336-4b52-b78e-e63a292498af
+#   tenant: whoiamtrial.onmicrosoft.com
+
+# env:
+  # vars.${{ github.ref_name }}_Policy_ArtifactName 
+  # artifactName: ${{ format('{0}_Policy_ArtifactName', github.ref_name) }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+jobs:
+  
+  DEV:
+    # The type of runner that the job will run on
+    if: github.ref_name == 'dev'
+    runs-on: ubuntu-latest
+    environment: Dev
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      # - uses: lindluni/actions-variable-groups@v1.0.0
+      #   with:
+      #     org: WhoIAM-Development
+      #     repo: WhoIAmPolicyDeployment
+      #     groups: |
+      #       Variables/DevVars.yml
+      # - name: Print Environment
+      #   run: env | sort
+      
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{Settings:'
+          tokenSuffix: '}'
+          files: '["**/*.xml"]'
+        env:
+          PolicySet: ${{ vars.POLICYSET }}
+          TenantShort: ${{ vars.TENANTSHORT }}
+          TenantGuid: ${{ vars.TENANTGUID }}
+          AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+          AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+          ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+          ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+          AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+          AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+          AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+          DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+          ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+          UIBaseUrl: ${{ vars.UIBASEURL }}
+
+      # - name: Archive artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
+      #     path: |
+      #       Policies/*.xml
+
+      - name: 'Upload TrustFrameworkBase Policy'
+        uses: azure-ad-b2c/deploy-trustframework-policy@v3
+        with:
+          folder: "Policies"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml"
+          tenant: ${{ vars.TENANT }}
+          clientId: ${{ vars.CLIENTID }}
+          clientSecret: ${{ secrets.clientSecret }}
+
+  STAGING:
+      # The type of runner that the job will run on
+      if: github.ref_name == 'main'
+      runs-on: ubuntu-latest
+      environment: Staging
+
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+        
+        # - uses: lindluni/actions-variable-groups@v1.0.0
+        #   with:
+        #     org: WhoIAM-Development
+        #     repo: WhoIAmPolicyDeployment
+        #     groups: |
+        #       Variables/DevVars.yml
+        # - name: Print Environment
+        #   run: env | sort
+        
+        - uses: cschleiden/replace-tokens@v1
+          with:
+            tokenPrefix: '{Settings:'
+            tokenSuffix: '}'
+            files: '["**/*.xml"]'
+          env:
+            PolicySet: ${{ vars.POLICYSET }}
+            TenantShort: ${{ vars.TENANTSHORT }}
+            TenantGuid: ${{ vars.TENANTGUID }}
+            AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+            AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+            ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+            ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+            AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+            AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+            AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+            DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+            ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+            UIBaseUrl: ${{ vars.UIBASEURL }}
+
+        # - name: Archive artifacts
+        #   uses: actions/upload-artifact@v3
+        #   with:
+        #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
+        #     path: |
+        #       Policies/*.xml
+
+        - name: 'Upload TrustFrameworkBase Policy'
+          uses: azure-ad-b2c/deploy-trustframework-policy@v3
+          with:
+            folder: "Policies"
+            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml"
+            tenant: ${{ vars.TENANT }}
+            clientId: ${{ vars.CLIENTID }}
+            clientSecret: ${{ secrets.clientSecret }}
+  PRODUCTION:
+      # The type of runner that the job will run on
+      if: github.ref_name == 'main'
+      runs-on: ubuntu-latest
+      environment: Production
+      needs: STAGING
+
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+        
+        # - uses: lindluni/actions-variable-groups@v1.0.0
+        #   with:
+        #     org: WhoIAM-Development
+        #     repo: WhoIAmPolicyDeployment
+        #     groups: |
+        #       Variables/DevVars.yml
+        # - name: Print Environment
+        #   run: env | sort
+        
+        - uses: cschleiden/replace-tokens@v1
+          with:
+            tokenPrefix: '{Settings:'
+            tokenSuffix: '}'
+            files: '["**/*.xml"]'
+          env:
+            PolicySet: ${{ vars.POLICYSET }}
+            TenantShort: ${{ vars.TENANTSHORT }}
+            TenantGuid: ${{ vars.TENANTGUID }}
+            AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+            AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+            ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+            ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+            AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+            AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+            AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+            DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+            ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+            UIBaseUrl: ${{ vars.UIBASEURL }}
+
+        # - name: Archive artifacts
+        #   uses: actions/upload-artifact@v3
+        #   with:
+        #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
+        #     path: |
+        #       Policies/*.xml
+
+        - name: 'Upload TrustFrameworkBase Policy'
+          uses: azure-ad-b2c/deploy-trustframework-policy@v3
+          with:
+            folder: "Policies"
+            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml"
+            tenant: ${{ vars.TENANT }}
+            clientId: ${{ vars.CLIENTID }}
+            clientSecret: ${{ secrets.clientSecret }}

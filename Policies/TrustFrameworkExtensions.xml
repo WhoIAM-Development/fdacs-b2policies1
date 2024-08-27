@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
+  PolicySchemaVersion="0.3.0.0" 
+  TenantId="{Settings:TenantShort}.onmicrosoft.com" 
+  PolicyId="B2C_1A_{Settings:PolicySet}local_TrustFrameworkExtensions" 
+  PublicPolicyUri="http://{Settings:TenantShort}.onmicrosoft.com/B2C_1A_{Settings:PolicySet}local_TrustFrameworkExtensions">
+
+  <!-- Build Number: {Settings:Build.BuildNumber}_{Settings:Release.ReleaseName} -->
+
+  <BasePolicy>
+    <TenantId>{Settings:TenantShort}.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_{Settings:PolicySet}local_TrustFrameworkLocalization</PolicyId>
+  </BasePolicy>
+
+  <!--BuildingBlocks>
+
+    <ClaimsSchema>
+
+
+    </ClaimsSchema>
+  </BuildingBlocks-->
+
+  <ClaimsProviders>
+
+    <ClaimsProvider>
+      <DisplayName>Local Account SignIn</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="login-NonInteractive">
+          <Metadata>
+            <Item Key="client_id">{Settings:AzureProxyIEFAppId}</Item>
+            <Item Key="IdTokenAudience">{Settings:AzureIEFAppId}</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="{Settings:AzureProxyIEFAppId}" />
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="{Settings:AzureIEFAppId}" />
+          </InputClaims>
+        </TechnicalProfile>
+
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Azure Active Directory</DisplayName>
+      <TechnicalProfiles>
+
+        <TechnicalProfile Id="AAD-Common">
+          <DisplayName>Azure Active Directory</DisplayName>
+          <Metadata>
+            <Item Key="ApplicationObjectId">{Settings:ExtensionsAppObjectId}</Item>
+            <Item Key="ClientId">{Settings:ExtensionsAppId}</Item>
+          </Metadata>
+        </TechnicalProfile>
+
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Application Insights</DisplayName>
+      <TechnicalProfiles>
+
+        <TechnicalProfile Id="AzureInsights-Common">
+          <Metadata>
+            <!-- The ApplicationInsights instrumentation key which will be used for logging the events -->
+            <Item Key="InstrumentationKey">{Settings:AppInsightsInstrumentationKey}</Item>
+            <!-- A Boolean that indicates whether developer mode is enabled. This controls how events are buffered. In a development environment with minimal event volume, enabling developer mode results in events being sent immediately to ApplicationInsights. -->
+            <Item Key="DeveloperMode">{Settings:AppInsightsDeveloperMode}</Item>
+            <!-- A Boolean that indicates whether telemetry should be enabled or not. -->
+            <Item Key="DisableTelemetry ">{Settings:AppInsightsDisableTelemetry}</Item>
+          </Metadata>
+        </TechnicalProfile>
+
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+  </ClaimsProviders>
+
+  <!--UserJourneys>
+	
+	</UserJourneys-->
+
+</TrustFrameworkPolicy>
