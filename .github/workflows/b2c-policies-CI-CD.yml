@@ -13,14 +13,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# env:
-#   clientId: abdf47fe-4336-4b52-b78e-e63a292498af
-#   tenant: whoiamtrial.onmicrosoft.com
-
-# env:
-  # vars.${{ github.ref_name }}_Policy_ArtifactName 
-  # artifactName: ${{ format('{0}_Policy_ArtifactName', github.ref_name) }}
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 
 jobs:
@@ -35,15 +27,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      
-      # - uses: lindluni/actions-variable-groups@v1.0.0
-      #   with:
-      #     org: WhoIAM-Development
-      #     repo: WhoIAmPolicyDeployment
-      #     groups: |
-      #       Variables/DevVars.yml
-      # - name: Print Environment
-      #   run: env | sort
       
       - uses: cschleiden/replace-tokens@v1
         with:
@@ -72,13 +55,6 @@ jobs:
           IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
           IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
           IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
-
-      # - name: Archive artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
-      #     path: |
-      #       Policies/*.xml
 
       - name: 'Upload TrustFrameworkBase Policy'
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
@@ -95,19 +71,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: QA
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      
-      # - uses: lindluni/actions-variable-groups@v1.0.0
-      #   with:
-      #     org: WhoIAM-Development
-      #     repo: WhoIAmPolicyDeployment
-      #     groups: |
-      #       Variables/DevVars.yml
-      # - name: Print Environment
-      #   run: env | sort
       
       - uses: cschleiden/replace-tokens@v1
         with:
@@ -137,12 +103,6 @@ jobs:
           IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
           IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
 
-      # - name: Archive artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
-      #     path: |
-      #       Policies/*.xml
 
       - name: 'Upload TrustFrameworkBase Policy'
         uses: azure-ad-b2c/deploy-trustframework-policy@v3
@@ -160,19 +120,9 @@ jobs:
       runs-on: ubuntu-latest
       environment: Staging
 
-      # Steps represent a sequence of tasks that will be executed as part of the job
       steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - uses: actions/checkout@v3
-        
-        # - uses: lindluni/actions-variable-groups@v1.0.0
-        #   with:
-        #     org: WhoIAM-Development
-        #     repo: WhoIAmPolicyDeployment
-        #     groups: |
-        #       Variables/DevVars.yml
-        # - name: Print Environment
-        #   run: env | sort
         
         - uses: cschleiden/replace-tokens@v1
           with:
@@ -202,13 +152,6 @@ jobs:
             IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
             IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
 
-        # - name: Archive artifacts
-        #   uses: actions/upload-artifact@v3
-        #   with:
-        #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
-        #     path: |
-        #       Policies/*.xml
-
         - name: 'Upload TrustFrameworkBase Policy'
           uses: azure-ad-b2c/deploy-trustframework-policy@v3
           with:
@@ -224,19 +167,9 @@ jobs:
       environment: Production
       needs: STAGING
 
-      # Steps represent a sequence of tasks that will be executed as part of the job
       steps:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - uses: actions/checkout@v3
-        
-        # - uses: lindluni/actions-variable-groups@v1.0.0
-        #   with:
-        #     org: WhoIAM-Development
-        #     repo: WhoIAmPolicyDeployment
-        #     groups: |
-        #       Variables/DevVars.yml
-        # - name: Print Environment
-        #   run: env | sort
         
         - uses: cschleiden/replace-tokens@v1
           with:
@@ -265,12 +198,6 @@ jobs:
             IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
             IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
             IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
-        # - name: Archive artifacts
-        #   uses: actions/upload-artifact@v3
-        #   with:
-        #     name: ${{vars.Policy_ArtifactName}} # ${{ vars[format('{0}_Policy_ArtifactName', github.ref_name)] }}
-        #     path: |
-        #       Policies/*.xml
 
         - name: 'Upload TrustFrameworkBase Policy'
           uses: azure-ad-b2c/deploy-trustframework-policy@v3
