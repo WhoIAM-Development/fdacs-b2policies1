@@ -269,12 +269,12 @@
   </ClaimType>
   
   <ClaimType Id="Otp">
-    <DisplayName>Secondary One-time password</DisplayName>
+    <DisplayName>One-time password</DisplayName>
     <DataType>string</DataType>
   </ClaimType>
  
   <ClaimType Id="VerificationCode">
-    <DisplayName>Secondary Verification Code</DisplayName>
+    <DisplayName>Verification Code</DisplayName>
     <DataType>string</DataType>
     <UserHelpText>Enter your email verification code</UserHelpText>
     <UserInputType>TextBox</UserInputType>
