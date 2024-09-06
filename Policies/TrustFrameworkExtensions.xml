@@ -983,7 +983,6 @@
     
           <OrchestrationStep Order="2" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
             <ClaimsProviderSelections>
-              <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
               <ClaimsProviderSelection TargetClaimsExchangeId="ForgotPasswordExchange" />
               <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
             </ClaimsProviderSelections>
@@ -1001,7 +1000,6 @@
               </Precondition>
             </Preconditions>
             <ClaimsExchanges>
-              <ClaimsExchange Id="FacebookExchange" TechnicalProfileReferenceId="StartFacebookFlow" />
               <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="StartSignUpFlow" />
               <ClaimsExchange Id="ForgotPasswordExchange" TechnicalProfileReferenceId="StartPasswordResetFlow" />
             </ClaimsExchanges>
