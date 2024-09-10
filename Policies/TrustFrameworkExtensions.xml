@@ -1344,14 +1344,12 @@
   
           <OrchestrationStep Order="2" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
             <ClaimsProviderSelections>
-              <ClaimsProviderSelection TargetClaimsExchangeId="FacebookExchange" />
               <ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
             </ClaimsProviderSelections>
           </OrchestrationStep>
   
           <OrchestrationStep Order="3" Type="ClaimsExchange">
             <ClaimsExchanges>
-              <ClaimsExchange Id="FacebookExchange" TechnicalProfileReferenceId="StartFacebookFlow" />
               <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
             </ClaimsExchanges>
           </OrchestrationStep>
