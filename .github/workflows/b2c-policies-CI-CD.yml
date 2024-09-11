@@ -1,0 +1,209 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI/CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events
+  push:
+    branches: [ "main", "dev" ,"QA" ]
+  pull_request:
+    branches: [ "main", "dev" ,"QA" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
+jobs:
+  
+  DEV:
+    # The type of runner that the job will run on
+    if: github.ref_name == 'dev'
+    runs-on: ubuntu-latest
+    environment: Dev
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{Settings:'
+          tokenSuffix: '}'
+          files: '["**/*.xml"]'
+        env:
+          PolicySet: ${{ vars.POLICYSET }}
+          TenantShort: ${{ vars.TENANTSHORT }}
+          TenantGuid: ${{ vars.TENANTGUID }}
+          AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+          AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+          ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+          ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+          AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+          AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+     #    AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+          DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+          ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+          FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+          FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+          DFPInstanceId: ${{ vars.DFPINSTANCEID }}
+          UIBaseUrl: ${{ vars.UIBASEURL }}
+          IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+          IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+          IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+          IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+          IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
+
+      - name: 'Upload TrustFrameworkBase Policy'
+        uses: azure-ad-b2c/deploy-trustframework-policy@v3
+        with:
+          folder: "Policies"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
+          tenant: ${{ vars.TENANT }}
+          clientId: ${{ vars.CLIENTID }}
+          clientSecret: ${{ secrets.clientSecret }}
+
+  TEST:
+    # The type of runner that the job will run on
+    if: github.ref_name == 'QA'
+    runs-on: ubuntu-latest
+    environment: QA
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{Settings:'
+          tokenSuffix: '}'
+          files: '["**/*.xml"]'
+        env:
+          PolicySet: ${{ vars.POLICYSET }}
+          TenantShort: ${{ vars.TENANTSHORT }}
+          TenantGuid: ${{ vars.TENANTGUID }}
+          AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+          AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+          ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+          ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+          AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+          AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+     #    AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+          DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+          ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+          FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+          FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+          DFPInstanceId: ${{ vars.DFPINSTANCEID }}
+          UIBaseUrl: ${{ vars.UIBASEURL }}
+          IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+          IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+          IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+          IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+          IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
+
+
+      - name: 'Upload TrustFrameworkBase Policy'
+        uses: azure-ad-b2c/deploy-trustframework-policy@v3
+        with:
+          folder: "Policies"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
+          tenant: ${{ vars.TENANT }}
+          clientId: ${{ vars.CLIENTID }}
+          clientSecret: ${{ secrets.clientSecret }}
+
+
+  STAGING:
+      # The type of runner that the job will run on
+      if: github.ref_name == 'main'
+      runs-on: ubuntu-latest
+      environment: Staging
+
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+        
+        - uses: cschleiden/replace-tokens@v1
+          with:
+            tokenPrefix: '{Settings:'
+            tokenSuffix: '}'
+            files: '["**/*.xml"]'
+          env:
+            PolicySet: ${{ vars.POLICYSET }}
+            TenantShort: ${{ vars.TENANTSHORT }}
+            TenantGuid: ${{ vars.TENANTGUID }}
+            AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+            AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+            ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+            ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+            AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+            AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+       #    AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+            DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+            ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+            FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+            FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+            DFPInstanceId: ${{ vars.DFPINSTANCEID }}
+            UIBaseUrl: ${{ vars.UIBASEURL }}
+            IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+            IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+            IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+            IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+            IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
+
+        - name: 'Upload TrustFrameworkBase Policy'
+          uses: azure-ad-b2c/deploy-trustframework-policy@v3
+          with:
+            folder: "Policies"
+            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
+            tenant: ${{ vars.TENANT }}
+            clientId: ${{ vars.CLIENTID }}
+            clientSecret: ${{ secrets.clientSecret }}
+  PRODUCTION:
+      # The type of runner that the job will run on
+      if: github.ref_name == 'main'
+      runs-on: ubuntu-latest
+      environment: Production
+      needs: STAGING
+
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v3
+        
+        - uses: cschleiden/replace-tokens@v1
+          with:
+            tokenPrefix: '{Settings:'
+            tokenSuffix: '}'
+            files: '["**/*.xml"]'
+          env:
+            PolicySet: ${{ vars.POLICYSET }}
+            TenantShort: ${{ vars.TENANTSHORT }}
+            TenantGuid: ${{ vars.TENANTGUID }}
+            AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+            AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+            ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+            ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+            AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+            AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+        #   AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+            DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+            ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+            FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+            FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+            DFPInstanceId: ${{ vars.DFPINSTANCEID }}
+            UIBaseUrl: ${{ vars.UIBASEURL }}
+            IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+            IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+            IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+            IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+            IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
+
+        - name: 'Upload TrustFrameworkBase Policy'
+          uses: azure-ad-b2c/deploy-trustframework-policy@v3
+          with:
+            folder: "Policies"
+            files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
+            tenant: ${{ vars.TENANT }}
+            clientId: ${{ vars.CLIENTID }}
+            clientSecret: ${{ secrets.clientSecret }}
