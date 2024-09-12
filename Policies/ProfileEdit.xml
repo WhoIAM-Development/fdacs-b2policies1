@@ -7,7 +7,7 @@
   TenantId="{Settings:TenantShort}.onmicrosoft.com"
   PolicyId="B2C_1A_{Settings:PolicySet}ProfileEdit"
   PublicPolicyUri="http://{Settings:TenantShort}.onmicrosoft.com/B2C_1A_{Settings:PolicySet}ProfileEdit"
-  {Settings:DeploymentMode} 
+  DeploymentMode=\"{Settings:DeploymentMode}\"
   UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
 
   <!-- Build Number: {Settings:Build.BuildNumber}_{Settings:Release.ReleaseName} -->

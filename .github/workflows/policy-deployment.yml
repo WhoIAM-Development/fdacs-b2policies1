@@ -1,0 +1,62 @@
+name: UI Deployment - reusable
+
+# Trigger the workflow on push or pull requests to the main or dev branches, or manually using workflow_dispatch
+on:
+  workflow_call:
+    inputs:
+      tgtenv:
+        required: true
+        type: string
+
+jobs:
+  reusable_workflow_job:
+    name: Deploy to ${{inputs.tgtenv}}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{inputs.tgtenv}}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - run: echo "🎉 target evn ${{inputs.tgtenv}}"
+      - run: echo "🎉 target evn inputs.tgtenv"
+      - run: echo "💡 var - POLICYSET - ${{vars.POLICYSET}}"
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '{Settings:'
+          tokenSuffix: '}'
+          files: '["**/*.xml"]'
+        env:
+          PolicySet: ${{ vars.POLICYSET }}
+          TenantShort: ${{ vars.TENANTSHORT }}
+          TenantGuid: ${{ vars.TENANTGUID }}
+          AzureIEFAppId: ${{ vars.AZUREIEFAPPID }}
+          AzureProxyIEFAppId: ${{ vars.AZUREPROXYIEFAPPID }}
+          ExtensionsAppId: ${{ vars.EXTENSIONSAPPID }}
+          ExtensionsAppObjectId: ${{ vars.EXTENSIONSAPPOBJECTID }}
+          AppInsightsInstrumentationKey: ${{ vars.APPINSIGHTSINSTRUMENTATIONKEY }}
+          AppInsightsDeveloperMode: ${{ vars.APPINSIGHTSDEVELOPERMODE }}
+     #    AppInsightsDisableTelemetry: ${{ vars.APPINSIGHTSDISABLETELEMETRY }}
+          DeploymentMode: ${{ vars.DEPLOYMENTMODE }}
+          ScriptExecutionElement: ${{ vars.SCRIPTEXECUTIONELEMENT }}
+          FacebookAppId: ${{ vars.FACEBOOKAPPID }}
+          FacebookSecretName: ${{ vars.FACEBOOKSECRETNAME }}
+          DFPInstanceId: ${{ vars.DFPINSTANCEID }}
+          UIBaseUrl: ${{ vars.UIBASEURL }}
+          IntermediateAppUrl: ${{ vars.INTERMEDIATEAPPURL }}
+          IntermediateApiAccessTokenTenantId: ${{ vars.INTERMEDIATEAPIACCESSTOKENTENANTID }}
+          IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
+          IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
+          IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
+
+      - name: 'Upload TrustFrameworkBase Policy'
+        uses: azure-ad-b2c/deploy-trustframework-policy@v5
+        with:
+          folder: "Policies"
+          files: "TrustFrameworkBase.xml,TrustFrameworkLocalization.xml,TrustFrameworkExtensions.xml,SignUpOrSignin.xml,ProfileEdit.xml,PasswordReset.xml"
+          tenant: ${{ vars.TENANT }}
+          clientId: ${{ vars.CLIENTID }}
+          clientSecret: ${{ secrets.clientSecret }}

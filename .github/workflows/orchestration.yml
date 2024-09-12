@@ -1,0 +1,57 @@
+name: B2C Policy Deployment
+
+# Trigger the workflow on push or pull requests to the main or dev branches, or manually using workflow_dispatch
+on:
+  push:
+    branches: [master, dev]
+  pull_request:
+    branches: [master, dev]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to build and deploy'
+        type: environment
+        required: true
+
+jobs:
+  deploy-to-environment:
+    name: Deploy to specific environment
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    uses: ./.github/workflows/policy-deployment.yml
+    with:
+      tgtenv: ${ { github.event.inputs.environment } }
+    secrets: inherit
+
+  deploy-to-dev:
+    name: Dev Deployment
+    if: ${{ github.event_name == 'push' && github.ref_name == 'dev' }}
+    uses: ./.github/workflows/policy-deployment.yml
+    with:
+      tgtenv: Dev
+    secrets: inherit
+
+  deploy-to-test:
+    name: Test Deployment  
+    if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
+    uses: ./.github/workflows/policy-deployment.yml
+    with:
+      tgtenv: Test
+    secrets: inherit
+
+  deploy-to-stage:
+    name: Stage Deployment  
+    if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
+    needs: deploy-to-test
+    uses: ./.github/workflows/policy-deployment.yml
+    with:
+      tgtenv: Stage
+    secrets: inherit
+
+  deploy-to-prod:
+    name: Prod Deployment  
+    if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
+    needs: deploy-to-stage
+    uses: ./.github/workflows/policy-deployment.yml
+    with:
+      tgtenv: Prod
+    secrets: inherit    
