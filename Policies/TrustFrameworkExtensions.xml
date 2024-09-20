@@ -344,19 +344,19 @@
   <ContentDefinitions>
 
     <ContentDefinition Id="api.signuporsignin">
-      <LoadUri>{Settings:UIBaseUrl}unified.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}</LoadUri>
+      <LoadUri>{Settings:UIBaseUrl}unified.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
     </ContentDefinition>
 
     <ContentDefinition Id="api.localaccountsignup">
-      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}</LoadUri>
+      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
     </ContentDefinition>
 
     <ContentDefinition Id="api.localaccountpasswordreset">
-      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}</LoadUri>
+      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
     </ContentDefinition>
 
     <ContentDefinition Id="api.localaccountsignin">
-      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}</LoadUri>
+      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
     </ContentDefinition>
 
   </ContentDefinitions>
@@ -386,19 +386,6 @@
   </BuildingBlocks>
 
   <ClaimsProviders>
-
-    <ClaimsProvider>
-      <DisplayName>Facebook</DisplayName>
-      <TechnicalProfiles>
-        <TechnicalProfile Id="Facebook-OAUTH">
-          <Metadata>
-            <Item Key="client_id">{Settings:FacebookAppId}</Item>
-            <Item Key="scope">email public_profile</Item>
-            <Item Key="ClaimsEndpoint">https://graph.facebook.com/me?fields=id,first_name,last_name,name,email</Item>
-          </Metadata>
-        </TechnicalProfile>
-      </TechnicalProfiles>
-    </ClaimsProvider>
 
     <ClaimsProvider>
       <DisplayName>Local Account SignIn</DisplayName>
@@ -1017,19 +1004,7 @@
             </ClaimsExchanges>
           </OrchestrationStep>
     
-         <OrchestrationStep Order="5" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>isFacebookAuthFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="FacebookAuthExchange" TechnicalProfileReferenceId="Facebook-OAUTH" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <OrchestrationStep Order="5" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
                 <Value>selectedIdp</Value>
@@ -1042,7 +1017,7 @@
           </OrchestrationStep>
     
           <!--Sample: Start the password reset flow-->
-          <OrchestrationStep Order="7" Type="InvokeSubJourney">
+          <OrchestrationStep Order="6" Type="InvokeSubJourney">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
                 <Value>isPasswordResetFlow</Value>
@@ -1055,7 +1030,7 @@
           </OrchestrationStep>
     
           <!--Sample: Start the sign up flow-->
-          <OrchestrationStep Order="8" Type="InvokeSubJourney">
+          <OrchestrationStep Order="7" Type="InvokeSubJourney">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
                 <Value>isSignupFlow</Value>
@@ -1068,7 +1043,7 @@
           </OrchestrationStep>
     
           <!-- For social IDP authentication, attempt to find the user account in the directory. -->
-          <OrchestrationStep Order="9" Type="ClaimsExchange">
+          <!--<OrchestrationStep Order="8" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
                 <Value>authenticationSource</Value>
@@ -1079,10 +1054,10 @@
             <ClaimsExchanges>
               <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId-NoError" />
             </ClaimsExchanges>
-          </OrchestrationStep>
+          </OrchestrationStep>-->
     
           <!-- Track that the authentication step is completed -->
-          <OrchestrationStep Order="10" Type="ClaimsExchange">
+          <OrchestrationStep Order="8" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
             </ClaimsExchanges>
@@ -1091,7 +1066,7 @@
           <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId).
             This can only happen when authentication happened using a social IDP. If local account was created or authentication done
             using ESTS in step 2, then an user account must exist in the directory by this time. -->
-          <OrchestrationStep Order="11" Type="ClaimsExchange">
+          <OrchestrationStep Order="9" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>objectId</Value>
@@ -1105,7 +1080,7 @@
     
           <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent
             in the token. -->
-          <OrchestrationStep Order="12" Type="ClaimsExchange">
+          <OrchestrationStep Order="10" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
                 <Value>authenticationSource</Value>
@@ -1121,7 +1096,7 @@
           <!-- The previous step (SelfAsserted-Social) could have been skipped if there were no attributes to collect
                from the user. So, in that case, create the user in the directory if one does not already exist
                (verified using objectId which would be set from the last step if account was created in the directory. -->
-          <OrchestrationStep Order="13" Type="ClaimsExchange">
+          <!--<OrchestrationStep Order="11" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>objectId</Value>
@@ -1131,9 +1106,9 @@
             <ClaimsExchanges>
               <ClaimsExchange Id="AADUserWrite" TechnicalProfileReferenceId="AAD-UserWriteUsingAlternativeSecurityId" />
             </ClaimsExchanges>
-          </OrchestrationStep>
+          </OrchestrationStep>-->
           
-          <OrchestrationStep Order="14" Type="InvokeSubJourney">
+          <OrchestrationStep Order="11" Type="InvokeSubJourney">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>objectIdFromSession</Value>
@@ -1155,7 +1130,7 @@
           </OrchestrationStep>
           
           <!-- Track that the mutifactor authentication step is initiated -->
-          <OrchestrationStep Order="15" Type="ClaimsExchange">
+          <OrchestrationStep Order="12" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>isPasswordResetFlow</Value>
@@ -1169,7 +1144,7 @@
     
           <!-- Phone verification: If MFA is not required, the next three steps (#16-#18) should be removed.
                This step checks whether there's a phone number on record,  for the user. If found, then the user is challenged to verify it. -->
-          <OrchestrationStep Order="16" Type="ClaimsExchange">
+          <OrchestrationStep Order="13" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>isActiveMFASession</Value>
@@ -1190,7 +1165,7 @@
           </OrchestrationStep>
     
           <!-- Track that the mutifactor authentication step is completed -->
-          <OrchestrationStep Order="17" Type="ClaimsExchange">
+          <OrchestrationStep Order="14" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>isPasswordResetFlow</Value>
@@ -1205,7 +1180,7 @@
           <!-- Save MFA phone number: The precondition verifies whether the user provided a new number in the
                previous step. If so, then the phone number is stored in the directory for future authentication
                requests. -->
-          <OrchestrationStep Order="18" Type="ClaimsExchange">
+          <OrchestrationStep Order="15" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
                 <Value>newPhoneNumberEntered</Value>
@@ -1217,10 +1192,10 @@
             </ClaimsExchanges>
           </OrchestrationStep>
     
-          <OrchestrationStep Order="19" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+          <OrchestrationStep Order="16" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
     
           <!-- Track that we have successfully sent a token -->
-          <OrchestrationStep Order="20" Type="ClaimsExchange">
+          <OrchestrationStep Order="17" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
             </ClaimsExchanges>
@@ -1366,19 +1341,7 @@
             </ClaimsExchanges>
           </OrchestrationStep>
   
-         <OrchestrationStep Order="5" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>isFacebookAuthFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="FacebookAuthExchange" TechnicalProfileReferenceId="Facebook-OAUTH" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <OrchestrationStep Order="5" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
                 <Value>selectedIdp</Value>
@@ -1390,7 +1353,7 @@
             </ClaimsExchanges>
           </OrchestrationStep>
   
-          <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <!--<OrchestrationStep Order="6" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
                 <Value>authenticationSource</Value>
@@ -1401,9 +1364,9 @@
             <ClaimsExchanges>
               <ClaimsExchange Id="AADUserRead" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
             </ClaimsExchanges>
-          </OrchestrationStep>
+          </OrchestrationStep>-->
   
-          <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <OrchestrationStep Order="6" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
                 <Value>authenticationSource</Value>
@@ -1417,13 +1380,13 @@
           </OrchestrationStep>
   
           <!-- Track that the authentication step is completed -->
-          <OrchestrationStep Order="9" Type="ClaimsExchange">
+          <OrchestrationStep Order="7" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
             </ClaimsExchanges>
           </OrchestrationStep>
 
-          <OrchestrationStep Order="10" Type="InvokeSubJourney">
+          <OrchestrationStep Order="8" Type="InvokeSubJourney">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>objectIdFromSession</Value>
@@ -1445,7 +1408,7 @@
           </OrchestrationStep>
   
           <!-- Track that the mutifactor authentication step is initiated -->
-          <OrchestrationStep Order="11" Type="ClaimsExchange">
+          <OrchestrationStep Order="9" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
             </ClaimsExchanges>
@@ -1455,43 +1418,43 @@
             their sign in email address or strong authentication email here. This guards against scenarios where a user's
             password is stolen, the attacker can change the email addresses leaving no way for the user to recover their account.
             By requiring 2FA, stolen passwords cannot be used to take over the account completely. -->
-          <OrchestrationStep Order="12" Type="ClaimsExchange">
+          <OrchestrationStep Order="10" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="PhoneFactor" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
             </ClaimsExchanges>
           </OrchestrationStep>
   
           <!-- Track that the mutifactor authentication step is completed -->
-          <OrchestrationStep Order="13" Type="ClaimsExchange">
+          <OrchestrationStep Order="11" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
             </ClaimsExchanges>
           </OrchestrationStep>
   
           <!-- Track that the profile edit step is initiated -->
-          <OrchestrationStep Order="14" Type="ClaimsExchange">
+          <OrchestrationStep Order="12" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackProfileEditInitiate" TechnicalProfileReferenceId="AzureInsights-ProfileEditInitiate" />
             </ClaimsExchanges>
           </OrchestrationStep>
   
-          <OrchestrationStep Order="15" Type="ClaimsExchange">
+          <OrchestrationStep Order="13" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
             </ClaimsExchanges>
           </OrchestrationStep>
   
           <!-- Track that the profile edit step is completed -->
-          <OrchestrationStep Order="16" Type="ClaimsExchange">
+          <OrchestrationStep Order="14" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackProfileEditComplete" TechnicalProfileReferenceId="AzureInsights-ProfileEditComplete" />
             </ClaimsExchanges>
           </OrchestrationStep>
   
-          <OrchestrationStep Order="17" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+          <OrchestrationStep Order="15" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
   
           <!-- Track that we have successfully sent a token -->
-          <OrchestrationStep Order="18" Type="ClaimsExchange">
+          <OrchestrationStep Order="16" Type="ClaimsExchange">
             <ClaimsExchanges>
               <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
             </ClaimsExchanges>

@@ -51,6 +51,7 @@ jobs:
           IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
           IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
           IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
+          Build.BuildNumber: ${{github.sha}.{github.run_number}}
 
       - name: 'Upload TrustFrameworkBase Policy'
         uses: azure-ad-b2c/deploy-trustframework-policy@v5
