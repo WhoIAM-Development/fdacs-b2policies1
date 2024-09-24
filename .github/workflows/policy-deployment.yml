@@ -1,4 +1,4 @@
-name: UI Deployment - reusable
+name: Policy Deployment - reusable
 
 # Trigger the workflow on push or pull requests to the main or dev branches, or manually using workflow_dispatch
 on:
@@ -51,7 +51,7 @@ jobs:
           IntermediateApiAccessTokenClientIdName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTIDNAME }}
           IntermediateApiAccessTokenClientSecretName: ${{ vars.INTERMEDIATEAPIACCESSTOKENCLIENTSECRETNAME }}
           IntermediateApiAccessTokenScope: ${{ vars.INTERMEDIATEAPIACCESSTOKENSCOPE }}
-          Build.BuildNumber: ${{github.sha}.{github.run_number}}
+          Build.BuildNumber: ${{github.sha}}-${{github.RUN_NUMBER}}
 
       - name: 'Upload TrustFrameworkBase Policy'
         uses: azure-ad-b2c/deploy-trustframework-policy@v5
