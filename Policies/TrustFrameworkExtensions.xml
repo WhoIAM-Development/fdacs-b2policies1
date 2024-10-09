@@ -1,387 +1,405 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TrustFrameworkPolicy 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" 
-  PolicySchemaVersion="0.3.0.0" 
-  TenantId="{Settings:TenantShort}.onmicrosoft.com" 
-  PolicyId="B2C_1A_{Settings:PolicySet}TrustFrameworkExtensions" 
-  PublicPolicyUri="http://{Settings:TenantShort}.onmicrosoft.com/B2C_1A_{Settings:PolicySet}TrustFrameworkExtensions">
-  
+<TrustFrameworkPolicy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06" PolicySchemaVersion="0.3.0.0" TenantId="{Settings:TenantShort}.onmicrosoft.com" PolicyId="B2C_1A_{Settings:PolicySet}TrustFrameworkExtensions" PublicPolicyUri="http://{Settings:TenantShort}.onmicrosoft.com/B2C_1A_{Settings:PolicySet}TrustFrameworkExtensions">
+
   <!-- Build Number: {Settings:Build.BuildNumber}_{Settings:Release.ReleaseName} -->
 
   <BasePolicy>
     <TenantId>{Settings:TenantShort}.onmicrosoft.com</TenantId>
     <PolicyId>B2C_1A_{Settings:PolicySet}TrustFrameworkLocalization</PolicyId>
   </BasePolicy>
-  
+
   <BuildingBlocks>
     <ClaimsSchema>
-    <ClaimType Id="dfp_device_deviceContextId">
-      <DisplayName>Session ID</DisplayName>
-      <DataType>string</DataType>
-      <UserInputType>TextBox</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_device_deviceContextId">
+        <DisplayName>Session ID</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>TextBox</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_user_language">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_user_language">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_email_isEmailValidated">
-      <DataType>boolean</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_email_isEmailValidated">
+        <DataType>boolean</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_email_isEmailUsername">
-      <DataType>boolean</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_email_isEmailUsername">
+        <DataType>boolean</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_device_ipAddress">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_device_ipAddress">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_Id">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_Id">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_TransactionReferenceId">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_TransactionReferenceId">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_merchantRuleDecision">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_merchantRuleDecision">
+        <DataType>string</DataType>
+      </ClaimType>
 
-     <ClaimType Id="dfp_riskScore">
-      <DataType>long</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_riskScore">
+        <DataType>long</DataType>
+      </ClaimType>
 
-     <ClaimType Id="dfp_botScore">
-      <DataType>long</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_botScore">
+        <DataType>long</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_riskScore_string">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_riskScore_string">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_botScore_string">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_botScore_string">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_decision_constvalue_approve">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_decision_constvalue_approve">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_StatusType">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_StatusType">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_ReasonType">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_ReasonType">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_ChallengeType">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_ChallengeType">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_CorrelationId">
-      <DataType>string</DataType>
-    </ClaimType>
+      <ClaimType Id="dfp_CorrelationId">
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_DeviceId">
-      <DisplayName>Device ID</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_DeviceId">
+        <DisplayName>Device ID</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_TrueIp">
-      <DisplayName>True IP</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_TrueIp">
+        <DisplayName>True IP</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_DeviceCountryCode">
-      <DisplayName>Country Code</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_DeviceCountryCode">
+        <DisplayName>Country Code</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_DeviceState">
-      <DisplayName>Device State</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_DeviceState">
+        <DisplayName>Device State</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_DeviceCity">
-      <DisplayName>Device City</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_DeviceCity">
+        <DisplayName>Device City</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_DevicePostalCode">
-      <DisplayName>Device Postal Code</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_DevicePostalCode">
+        <DisplayName>Device Postal Code</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_DeviceAsn">
-      <DisplayName>ASN</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_DeviceAsn">
+        <DisplayName>ASN</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_Platform">
-      <DisplayName>Device Platform</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_Platform">
+        <DisplayName>Device Platform</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_BrowserUserAgentLanguages">
-      <DisplayName>Browser User Agent Languages</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_BrowserUserAgentLanguages">
+        <DisplayName>Browser User Agent Languages</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_BrowserUserAgent">
-      <DisplayName>Browser User Agent</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_BrowserUserAgent">
+        <DisplayName>Browser User Agent</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_TcpDistance">
-      <DisplayName>TCP Distance</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_TcpDistance">
+        <DisplayName>TCP Distance</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_Carrier">
-      <DisplayName>Carrier</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_Carrier">
+        <DisplayName>Carrier</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_IpRoutingType">
-      <DisplayName>IP Routing Type</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_IpRoutingType">
+        <DisplayName>IP Routing Type</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_Proxy">
-      <DisplayName>Proxy</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_Proxy">
+        <DisplayName>Proxy</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_UserAgentPlatform">
-      <DisplayName>User Platform</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_UserAgentPlatform">
+        <DisplayName>User Platform</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_UserAgentBrowser">
-      <DisplayName>User Browser</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_UserAgentBrowser">
+        <DisplayName>User Browser</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_UserAgentOperatingSystem">
-      <DisplayName>User OS</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_UserAgentOperatingSystem">
+        <DisplayName>User OS</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_EmailDomin">
-      <DisplayName>Email Domain</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_EmailDomin">
+        <DisplayName>Email Domain</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-    <ClaimType Id="dfp_EmailPattern">
-      <DisplayName>Email Pattern</DisplayName>
-      <DataType>string</DataType>
-      <UserHelpText></UserHelpText>
-      <UserInputType>Readonly</UserInputType>
-    </ClaimType>
+      <ClaimType Id="dfp_EmailPattern">
+        <DisplayName>Email Pattern</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-  <ClaimType Id="bearerToken">
-    <DisplayName>Bearer token</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
+      <ClaimType Id="bearerToken">
+        <DisplayName>Bearer token</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
 
-  <ClaimType Id="dfp_Rule">
-    <DataType>string</DataType>
-  </ClaimType>  
+      <ClaimType Id="dfp_Rule">
+        <DataType>string</DataType>
+      </ClaimType>
 
-  <ClaimType Id="dfp_ClauseName">
-    <DataType>string</DataType>
-  </ClaimType>  
+      <ClaimType Id="dfp_ClauseName">
+        <DataType>string</DataType>
+      </ClaimType>
 
-  <ClaimType Id="dfp_Observe_Log">
-    <DisplayName>DFP Observe statement log</DisplayName>
-    <DataType>string</DataType>
-    <UserHelpText></UserHelpText>
-    <UserInputType>Readonly</UserInputType>
-  </ClaimType>
-  
-  <ClaimType Id="Apigrant_type">
-    <DisplayName>Grant type</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
+      <ClaimType Id="dfp_Observe_Log">
+        <DisplayName>DFP Observe statement log</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText></UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
-  <ClaimType Id="Apiscope">
-    <DisplayName>scope</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
+      <ClaimType Id="Apigrant_type">
+        <DisplayName>Grant type</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
 
-  <ClaimType Id="userMessage">
-    <DisplayName>User message</DisplayName>
-    <DataType>string</DataType>
-    <UserHelpText>Add help text here</UserHelpText>
-    <UserInputType>Paragraph</UserInputType>
-  </ClaimType>
-  
-  <ClaimType Id="isActiveEmailSession">
-    <DisplayName>isActiveEmailSession</DisplayName>
-    <DataType>boolean</DataType>
-  </ClaimType>
-  
-  <ClaimType Id="isBreakAuthFlow">
-    <DisplayName>Indicates whether the auth flow is breaked</DisplayName>
-    <DataType>boolean</DataType>
-    <AdminHelpText>Break Auth Flow</AdminHelpText>
-  </ClaimType>
-  
-  <ClaimType Id="Otp">
-    <DisplayName>One-time password</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
- 
-  <ClaimType Id="VerificationCode">
-    <DisplayName>Verification Code</DisplayName>
-    <DataType>string</DataType>
-    <UserHelpText>Enter your email verification code</UserHelpText>
-    <UserInputType>TextBox</UserInputType>
-  </ClaimType>
+      <ClaimType Id="Apiscope">
+        <DisplayName>scope</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
 
-  <ClaimType Id="logonIdentifier">
-    <DisplayName>User name or email address that the user can use to sign in</DisplayName>
-    <DataType>string</DataType>
-  </ClaimType>
-  
-</ClaimsSchema>
-  <ClaimsTransformations>
-    <ClaimsTransformation Id="AssertAuthFlowBroken" TransformationMethod="AssertBooleanClaimIsEqualToValue">
-      <InputClaims>
-        <InputClaim ClaimTypeReferenceId="isBreakAuthFlow" TransformationClaimType="inputClaim" />
-      </InputClaims>
-      <InputParameters>
-        <InputParameter Id="valueToCompareTo" DataType="boolean" Value="false" />
-      </InputParameters>
-    </ClaimsTransformation>
-    <ClaimsTransformation Id="CreateDfpRiskScoreString" TransformationMethod="ConvertNumberToStringClaim">
-      <InputClaims>
-        <InputClaim ClaimTypeReferenceId="dfp_riskScore" TransformationClaimType="inputClaim" />
-      </InputClaims>
-      <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="dfp_riskScore_string" TransformationClaimType="outputClaim" />
-      </OutputClaims>
-    </ClaimsTransformation>
+      <ClaimType Id="userMessage">
+        <DisplayName>User message</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Add help text here</UserHelpText>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
 
-    <ClaimsTransformation Id="CreateDfpBotScoreString" TransformationMethod="ConvertNumberToStringClaim">
-      <InputClaims>
-        <InputClaim ClaimTypeReferenceId="dfp_botScore" TransformationClaimType="inputClaim" />
-      </InputClaims>
-      <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="dfp_botScore_string" TransformationClaimType="outputClaim" />
-      </OutputClaims>
-    </ClaimsTransformation>
+      <ClaimType Id="isActiveEmailSession">
+        <DisplayName>isActiveEmailSession</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
 
-    <ClaimsTransformation Id="CreateSubjectClaimFromObjectID" TransformationMethod="CreateStringClaim">
-      <InputParameters>
-        <InputParameter Id="value" DataType="string" Value="Not supported currently. Use oid claim." />
-      </InputParameters>
-      <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="sub" TransformationClaimType="createdClaim" />
-      </OutputClaims>
-    </ClaimsTransformation>
+      <ClaimType Id="isBreakAuthFlow">
+        <DisplayName>Indicates whether the auth flow is breaked</DisplayName>
+        <DataType>boolean</DataType>
+        <AdminHelpText>Break Auth Flow</AdminHelpText>
+      </ClaimType>
 
-    <ClaimsTransformation Id="CreateMessageSignupRejected" TransformationMethod="CreateStringClaim">
-      <InputParameters>
-        <InputParameter Id="value" DataType="string" Value="Your sign-up was rejected by Fraud Protection." />
-      </InputParameters>
-      <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="userMessage" TransformationClaimType="createdClaim" />
-      </OutputClaims>
-    </ClaimsTransformation>
+      <ClaimType Id="Otp">
+        <DisplayName>One-time password</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ClaimsTransformation Id="CreateMessageSignInRejected" TransformationMethod="CreateStringClaim">
-      <InputParameters>
-        <InputParameter Id="value" DataType="string" Value="Your sign-in was rejected by Fraud Protection." />
-      </InputParameters>
-      <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="userMessage" TransformationClaimType="createdClaim" />
-      </OutputClaims>
-    </ClaimsTransformation>
-  </ClaimsTransformations>
+      <ClaimType Id="VerificationCode">
+        <DisplayName>Verification Code</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Enter your email verification code</UserHelpText>
+        <UserInputType>TextBox</UserInputType>
+      </ClaimType>
 
-  <ContentDefinitions>
+      <ClaimType Id="logonIdentifier">
+        <DisplayName>User name or email address that the user can use to sign in</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
 
-    <ContentDefinition Id="api.signuporsignin">
-      <LoadUri>{Settings:UIBaseUrl}unified.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
-    </ContentDefinition>
+      <ClaimType Id="companyname">
+        <DisplayName>Company Name</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Name of the company you work for</UserHelpText>
+        <UserInputType>TextBox</UserInputType>
+      </ClaimType>
 
-    <ContentDefinition Id="api.localaccountsignup">
-      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
-    </ContentDefinition>
 
-    <ContentDefinition Id="api.localaccountpasswordreset">
-      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
-    </ContentDefinition>
+    </ClaimsSchema>
+    <ClaimsTransformations>
 
-    <ContentDefinition Id="api.localaccountsignin">
-      <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
-    </ContentDefinition>
+      <ClaimsTransformation Id="CreateDisplayNameFromFirstNameAndLastName" TransformationMethod="FormatStringMultipleClaims">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="givenName" TransformationClaimType="inputClaim1" />
+          <InputClaim ClaimTypeReferenceId="surname" TransformationClaimType="inputClaim2" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="stringFormat" DataType="string" Value="{1}, {0}" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="displayName" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
 
-  </ContentDefinitions>
 
-  <DisplayControls>
-    <DisplayControl Id="emailVerificationControl" UserInterfaceControlType="VerificationControl">
-      <DisplayClaims>
-        <DisplayClaim ClaimTypeReferenceId="email" Required="true" />
-        <DisplayClaim ClaimTypeReferenceId="verificationCode" ControlClaimType="VerificationCode" Required="true" />
-      </DisplayClaims>
-      <OutputClaims></OutputClaims>
-      <Actions>
-        <Action Id="SendCode">
-          <ValidationClaimsExchange>
-            <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-SendCode" />
-          </ValidationClaimsExchange>
-        </Action>
-        <Action Id="VerifyCode">
-          <ValidationClaimsExchange>
-            <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-VerifyCode" />
-          </ValidationClaimsExchange>
-        </Action>
-      </Actions>
-    </DisplayControl>
-</DisplayControls> 
+      <ClaimsTransformation Id="AssertAuthFlowBroken" TransformationMethod="AssertBooleanClaimIsEqualToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="isBreakAuthFlow" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="false" />
+        </InputParameters>
+      </ClaimsTransformation>
+      <ClaimsTransformation Id="CreateDfpRiskScoreString" TransformationMethod="ConvertNumberToStringClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="dfp_riskScore" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="dfp_riskScore_string" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CreateDfpBotScoreString" TransformationMethod="ConvertNumberToStringClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="dfp_botScore" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="dfp_botScore_string" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CreateSubjectClaimFromObjectID" TransformationMethod="CreateStringClaim">
+        <InputParameters>
+          <InputParameter Id="value" DataType="string" Value="Not supported currently. Use oid claim." />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="sub" TransformationClaimType="createdClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CreateMessageSignupRejected" TransformationMethod="CreateStringClaim">
+        <InputParameters>
+          <InputParameter Id="value" DataType="string" Value="Your sign-up was rejected by Fraud Protection." />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="userMessage" TransformationClaimType="createdClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CreateMessageSignInRejected" TransformationMethod="CreateStringClaim">
+        <InputParameters>
+          <InputParameter Id="value" DataType="string" Value="Your sign-in was rejected by Fraud Protection." />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="userMessage" TransformationClaimType="createdClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+    </ClaimsTransformations>
+
+    <ContentDefinitions>
+
+      <ContentDefinition Id="api.signuporsignin">
+        <LoadUri>{Settings:UIBaseUrl}unified.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.localaccountsignup">
+        <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.localaccountpasswordreset">
+        <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.localaccountsignin">
+        <LoadUri>{Settings:UIBaseUrl}selfAsserted.html?SessionId={Context:CorrelationId}&amp;InstanceId={Settings:DFPInstanceId}&amp;ver={Settings:Build.BuildNumber}</LoadUri>
+      </ContentDefinition>
+
+    </ContentDefinitions>
+
+    <DisplayControls>
+      <DisplayControl Id="emailVerificationControl" UserInterfaceControlType="VerificationControl">
+        <DisplayClaims>
+          <DisplayClaim ClaimTypeReferenceId="email" Required="true" />
+          <DisplayClaim ClaimTypeReferenceId="verificationCode" ControlClaimType="VerificationCode" Required="true" />
+        </DisplayClaims>
+        <OutputClaims></OutputClaims>
+        <Actions>
+          <Action Id="SendCode">
+            <ValidationClaimsExchange>
+              <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-SendCode" />
+            </ValidationClaimsExchange>
+          </Action>
+          <Action Id="VerifyCode">
+            <ValidationClaimsExchange>
+              <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-VerifyCode" />
+            </ValidationClaimsExchange>
+          </Action>
+        </Actions>
+      </DisplayControl>
+    </DisplayControls>
 
   </BuildingBlocks>
 
@@ -413,6 +431,31 @@
             <Item Key="ApplicationObjectId">{Settings:ExtensionsAppObjectId}</Item>
             <Item Key="ClientId">{Settings:ExtensionsAppId}</Item>
           </Metadata>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserWriteProfileUsingObjectId">
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="CreateDisplayNameFromFirstNameAndLastName" />
+          </InputClaimsTransformations>
+          <PersistedClaims>
+            <PersistedClaim ClaimTypeReferenceId="displayName" />
+          </PersistedClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="displayName" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserWriteUsingLogonEmail">
+          <PersistedClaims>
+            <!-- Required claims -->
+            <PersistedClaim ClaimTypeReferenceId="companyName" PartnerClaimType="extension_companyName" />
+          </PersistedClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserReadUsingObjectId">
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="companyName" PartnerClaimType="extension_companyName" />
+          </OutputClaims>
         </TechnicalProfile>
 
       </TechnicalProfiles>
@@ -537,7 +580,7 @@
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
         </TechnicalProfile>
 
-        
+
 
         <TechnicalProfile Id="RestApi-DFP-CreateAccountStatus-Approved">
           <DisplayName>DFP Create Status - Approved</DisplayName>
@@ -620,7 +663,7 @@
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="bearerToken" />
             <InputClaim ClaimTypeReferenceId="dfp_Id" PartnerClaimType="LoginId" />
-            <InputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="UserId"  />
+            <InputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="UserId" />
           </InputClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="dfp_CorrelationId" PartnerClaimType="correlationId" />
@@ -660,11 +703,11 @@
           <IncludeTechnicalProfile ReferenceId="RestApi-DFP-LoginAccountStatus"/>
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
         </TechnicalProfile>
-        
+
       </TechnicalProfiles>
 
     </ClaimsProvider>
-   
+
     <ClaimsProvider>
       <DisplayName>Local Account</DisplayName>
       <TechnicalProfiles>
@@ -764,9 +807,9 @@
             <DisplayClaim DisplayControlReferenceId="emailVerificationControl" />
             <DisplayClaim ClaimTypeReferenceId="newPassword" Required="true" />
             <DisplayClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
-            <DisplayClaim ClaimTypeReferenceId="displayName" Required="true" />
             <DisplayClaim ClaimTypeReferenceId="givenName" Required="true" />
-            <DisplayClaim ClaimTypeReferenceId="surName" Required="true" />            
+            <DisplayClaim ClaimTypeReferenceId="surName" Required="true" />
+            <DisplayClaim ClaimTypeReferenceId="companyname" />
           </DisplayClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="objectId" />
@@ -782,7 +825,7 @@
             <OutputClaim ClaimTypeReferenceId="givenName" />
             <OutputClaim ClaimTypeReferenceId="surName" />
 
-            <OutputClaim ClaimTypeReferenceId="isActiveEmailSession"  DefaultValue="true" AlwaysUseDefaultValue="true"/>
+            <OutputClaim ClaimTypeReferenceId="isActiveEmailSession" DefaultValue="true" AlwaysUseDefaultValue="true"/>
 
             <OutputClaim ClaimTypeReferenceId="dfp_merchantRuleDecision" />
             <OutputClaim ClaimTypeReferenceId="dfp_Id" />
@@ -813,7 +856,7 @@
           </OutputClaims>
           <ValidationTechnicalProfiles>
             <ValidationTechnicalProfile ReferenceId="REST-AcquireAccessToken" />
-            
+
             <ValidationTechnicalProfile ReferenceId="RestApi-DFP-CreateAccount" />
 
             <ValidationTechnicalProfile ReferenceId="RestApi-DFP-CreateAccountStatus-Rejected">
@@ -888,28 +931,28 @@
       <DisplayName>One time password technical profiles</DisplayName>
       <TechnicalProfiles>
         <TechnicalProfile Id="AadSspr-SendCode">
-        <DisplayName>Send Code</DisplayName>
-        <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AadSsprProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-        <Metadata>
+          <DisplayName>Send Code</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AadSsprProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
             <Item Key="Operation">SendCode</Item>
-        </Metadata>
-        <InputClaims>
+          </Metadata>
+          <InputClaims>
             <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="emailAddress" />
-        </InputClaims>
+          </InputClaims>
         </TechnicalProfile>
         <TechnicalProfile Id="AadSspr-VerifyCode">
-        <DisplayName>Verify Code</DisplayName>
-        <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AadSsprProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-        <Metadata>
+          <DisplayName>Verify Code</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AadSsprProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
             <Item Key="Operation">VerifyCode</Item>
-        </Metadata>
-        <InputClaims>
+          </Metadata>
+          <InputClaims>
             <InputClaim ClaimTypeReferenceId="verificationCode" />
             <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="emailAddress" />
-        </InputClaims>
+          </InputClaims>
         </TechnicalProfile>
-    </TechnicalProfiles>
-    </ClaimsProvider>  
+      </TechnicalProfiles>
+    </ClaimsProvider>
 
     <ClaimsProvider>
       <DisplayName>Application Insights</DisplayName>
@@ -956,94 +999,94 @@
 
   </ClaimsProviders>
 
-    <UserJourneys>
+  <UserJourneys>
 
-      <UserJourney Id="SignUpOrSignIn-Custom">
-        <OrchestrationSteps>
-    
-          <!-- Track that we have received an authentication request -->
-          <OrchestrationStep Order="1" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <OrchestrationStep Order="2" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
-            <ClaimsProviderSelections>
-              <ClaimsProviderSelection TargetClaimsExchangeId="ForgotPasswordExchange" />
-              <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
-            </ClaimsProviderSelections>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!-- Check if the user has selected to sign in using one of the social providers -->
-          <OrchestrationStep Order="3" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>objectId</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="StartSignUpFlow" />
-              <ClaimsExchange Id="ForgotPasswordExchange" TechnicalProfileReferenceId="StartPasswordResetFlow" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <OrchestrationStep Order="4" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>selectedIdp</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackIdpAuthenticationInitiate" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationInitiate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <OrchestrationStep Order="5" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>selectedIdp</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackIdpAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!--Sample: Start the password reset flow-->
-          <OrchestrationStep Order="6" Type="InvokeSubJourney">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>isPasswordResetFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <JourneyList>
-              <Candidate SubJourneyReferenceId="PasswordReset-Custom" />
-            </JourneyList>
-          </OrchestrationStep>
-    
-          <!--Sample: Start the sign up flow-->
-          <OrchestrationStep Order="7" Type="InvokeSubJourney">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>isSignupFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <JourneyList>
-              <Candidate SubJourneyReferenceId="SignUp-Custom" />
-            </JourneyList>
-          </OrchestrationStep>
-    
-          <!-- For social IDP authentication, attempt to find the user account in the directory. -->
-          <!--<OrchestrationStep Order="8" Type="ClaimsExchange">
+    <UserJourney Id="SignUpOrSignIn-Custom">
+      <OrchestrationSteps>
+
+        <!-- Track that we have received an authentication request -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="ForgotPasswordExchange" />
+            <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+          </ClaimsProviderSelections>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Check if the user has selected to sign in using one of the social providers -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="StartSignUpFlow" />
+            <ClaimsExchange Id="ForgotPasswordExchange" TechnicalProfileReferenceId="StartPasswordResetFlow" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationInitiate" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!--Sample: Start the password reset flow-->
+        <OrchestrationStep Order="6" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="PasswordReset-Custom" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!--Sample: Start the sign up flow-->
+        <OrchestrationStep Order="7" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="SignUp-Custom" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- For social IDP authentication, attempt to find the user account in the directory. -->
+        <!--<OrchestrationStep Order="8" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
                 <Value>authenticationSource</Value>
@@ -1055,48 +1098,48 @@
               <ClaimsExchange Id="AADUserReadUsingAlternativeSecurityId" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId-NoError" />
             </ClaimsExchanges>
           </OrchestrationStep>-->
-    
-          <!-- Track that the authentication step is completed -->
-          <OrchestrationStep Order="8" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId).
+
+        <!-- Track that the authentication step is completed -->
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId).
             This can only happen when authentication happened using a social IDP. If local account was created or authentication done
             using ESTS in step 2, then an user account must exist in the directory by this time. -->
-          <OrchestrationStep Order="9" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>objectId</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="SelfAsserted-Social" TechnicalProfileReferenceId="SelfAsserted-Social" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent
+        <OrchestrationStep Order="9" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SelfAsserted-Social" TechnicalProfileReferenceId="SelfAsserted-Social" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent
             in the token. -->
-          <OrchestrationStep Order="10" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-                <Value>authenticationSource</Value>
-                <Value>socialIdpAuthentication</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!-- The previous step (SelfAsserted-Social) could have been skipped if there were no attributes to collect
+        <OrchestrationStep Order="10" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- The previous step (SelfAsserted-Social) could have been skipped if there were no attributes to collect
                from the user. So, in that case, create the user in the directory if one does not already exist
                (verified using objectId which would be set from the last step if account was created in the directory. -->
-          <!--<OrchestrationStep Order="11" Type="ClaimsExchange">
+        <!--<OrchestrationStep Order="11" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>objectId</Value>
@@ -1107,253 +1150,253 @@
               <ClaimsExchange Id="AADUserWrite" TechnicalProfileReferenceId="AAD-UserWriteUsingAlternativeSecurityId" />
             </ClaimsExchanges>
           </OrchestrationStep>-->
-          
-          <OrchestrationStep Order="11" Type="InvokeSubJourney">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>objectIdFromSession</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>isPasswordResetFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>            
-              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-                <Value>authenticationSource</Value>
-                <Value>socialIdpAuthentication</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <JourneyList>
-              <Candidate SubJourneyReferenceId="DFP-Verification" />
-            </JourneyList>
-          </OrchestrationStep>
-          
-          <!-- Track that the mutifactor authentication step is initiated -->
-          <OrchestrationStep Order="12" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>isPasswordResetFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!-- Phone verification: If MFA is not required, the next three steps (#16-#18) should be removed.
+
+        <OrchestrationStep Order="11" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectIdFromSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="DFP-Verification" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="12" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Phone verification: If MFA is not required, the next three steps (#16-#18) should be removed.
                This step checks whether there's a phone number on record,  for the user. If found, then the user is challenged to verify it. -->
-          <OrchestrationStep Order="13" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>isActiveMFASession</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-              <!-- <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+        <OrchestrationStep Order="13" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMFASession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <!-- <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>strongAuthenticationPhoneNumber</Value>
                 <Action>SkipThisOrchestrationStep</Action>
               </Precondition> -->
-               <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>isPasswordResetFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!-- Track that the mutifactor authentication step is completed -->
-          <OrchestrationStep Order="14" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>isPasswordResetFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <!-- Save MFA phone number: The precondition verifies whether the user provided a new number in the
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the mutifactor authentication step is completed -->
+        <OrchestrationStep Order="14" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Save MFA phone number: The precondition verifies whether the user provided a new number in the
                previous step. If so, then the phone number is stored in the directory for future authentication
                requests. -->
-          <OrchestrationStep Order="15" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>newPhoneNumberEntered</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="AADUserWriteWithObjectId" TechnicalProfileReferenceId="AAD-UserWritePhoneNumberUsingObjectId" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-    
-          <OrchestrationStep Order="16" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-    
-          <!-- Track that we have successfully sent a token -->
-          <OrchestrationStep Order="17" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
+        <OrchestrationStep Order="15" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>newPhoneNumberEntered</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserWriteWithObjectId" TechnicalProfileReferenceId="AAD-UserWritePhoneNumberUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="16" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+        <!-- Track that we have successfully sent a token -->
+        <OrchestrationStep Order="17" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
 
       </OrchestrationSteps>
-        <ClientDefinition ReferenceId="DefaultWeb" />
-      </UserJourney>
-      <UserJourney Id="PasswordReset-Custom">
-        <OrchestrationSteps>
-  
-          <!-- Track that we have received an authentication request -->
-          <OrchestrationStep Order="1" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="2" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the authentication step is completed -->
-          <OrchestrationStep Order="3" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="4" Type="InvokeSubJourney">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>objectIdFromSession</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>isPasswordResetFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>            
-              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-                <Value>authenticationSource</Value>
-                <Value>socialIdpAuthentication</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <JourneyList>
-              <Candidate SubJourneyReferenceId="DFP-Verification" />
-            </JourneyList>
-          </OrchestrationStep>
-  
-           <!-- Track that the mutifactor authentication step is initiated -->
-          <OrchestrationStep Order="5" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+    <UserJourney Id="PasswordReset-Custom">
+      <OrchestrationSteps>
 
-          <OrchestrationStep Order="6" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the mutifactor authentication step is completed -->
-          <OrchestrationStep Order="7" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the password reset flow is started-->
-          <OrchestrationStep Order="8" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackPasswordResetInitiate" TechnicalProfileReferenceId="AzureInsights-PasswordResetInitiate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="9" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the password reset flow is completed-->
-          <OrchestrationStep Order="10" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="11" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="12" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-  
-          <!-- Track that we have successfully sent a token -->
-          <OrchestrationStep Order="13" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-        </OrchestrationSteps>
-        <ClientDefinition ReferenceId="DefaultWeb" />
-      </UserJourney>
-      <UserJourney Id="ProfileEdit-Custom">
-        <OrchestrationSteps>
-  
-          <!-- Track that we have received an authentication request -->
-          <OrchestrationStep Order="1" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="2" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
-            <ClaimsProviderSelections>
-              <ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
-            </ClaimsProviderSelections>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="3" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="4" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>selectedIdp</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackIdpAuthenticationInitiate" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationInitiate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="5" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                <Value>selectedIdp</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackIdpAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!--<OrchestrationStep Order="6" Type="ClaimsExchange">
+        <!-- Track that we have received an authentication request -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the authentication step is completed -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectIdFromSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="DFP-Verification" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the mutifactor authentication step is completed -->
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the password reset flow is started-->
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackPasswordResetInitiate" TechnicalProfileReferenceId="AzureInsights-PasswordResetInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="9" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the password reset flow is completed-->
+        <OrchestrationStep Order="10" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="11" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="12" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+        <!-- Track that we have successfully sent a token -->
+        <OrchestrationStep Order="13" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+    <UserJourney Id="ProfileEdit-Custom">
+      <OrchestrationSteps>
+
+        <!-- Track that we have received an authentication request -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationInitiate" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!--<OrchestrationStep Order="6" Type="ClaimsExchange">
             <Preconditions>
               <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
                 <Value>authenticationSource</Value>
@@ -1365,420 +1408,420 @@
               <ClaimsExchange Id="AADUserRead" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
             </ClaimsExchanges>
           </OrchestrationStep>-->
-  
-          <OrchestrationStep Order="6" Type="ClaimsExchange">
-            <Preconditions>
-              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-                <Value>authenticationSource</Value>
-                <Value>socialIdpAuthentication</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <ClaimsExchanges>
-              <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the authentication step is completed -->
-          <OrchestrationStep Order="7" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
 
-          <OrchestrationStep Order="8" Type="InvokeSubJourney">
-            <Preconditions>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>objectIdFromSession</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-              <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                <Value>isPasswordResetFlow</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>            
-              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-                <Value>authenticationSource</Value>
-                <Value>socialIdpAuthentication</Value>
-                <Action>SkipThisOrchestrationStep</Action>
-              </Precondition>
-            </Preconditions>
-            <JourneyList>
-              <Candidate SubJourneyReferenceId="DFP-Verification" />
-            </JourneyList>
-          </OrchestrationStep>
-  
-          <!-- Track that the mutifactor authentication step is initiated -->
-          <OrchestrationStep Order="9" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- If the user ever stepped up to use 2FA, profile update must verify this because the user will be able to change
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the authentication step is completed -->
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="8" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectIdFromSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="DFP-Verification" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="9" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- If the user ever stepped up to use 2FA, profile update must verify this because the user will be able to change
             their sign in email address or strong authentication email here. This guards against scenarios where a user's
             password is stolen, the attacker can change the email addresses leaving no way for the user to recover their account.
             By requiring 2FA, stolen passwords cannot be used to take over the account completely. -->
-          <OrchestrationStep Order="10" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="PhoneFactor" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the mutifactor authentication step is completed -->
-          <OrchestrationStep Order="11" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the profile edit step is initiated -->
-          <OrchestrationStep Order="12" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackProfileEditInitiate" TechnicalProfileReferenceId="AzureInsights-ProfileEditInitiate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="13" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <!-- Track that the profile edit step is completed -->
-          <OrchestrationStep Order="14" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackProfileEditComplete" TechnicalProfileReferenceId="AzureInsights-ProfileEditComplete" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-          <OrchestrationStep Order="15" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-  
-          <!-- Track that we have successfully sent a token -->
-          <OrchestrationStep Order="16" Type="ClaimsExchange">
-            <ClaimsExchanges>
-              <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
-            </ClaimsExchanges>
-          </OrchestrationStep>
-  
-        </OrchestrationSteps>
-        <ClientDefinition ReferenceId="DefaultWeb" />
-      </UserJourney>
-  
-	
-    </UserJourneys>
-<SubJourneys>
-  <SubJourney Id="SignUp-Custom" Type="Call">
-    <OrchestrationSteps>
+        <OrchestrationStep Order="10" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PhoneFactor" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <!-- Track that the sign up step is initiated -->
-      <OrchestrationStep Order="1" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="TrackSignUpInitiate" TechnicalProfileReferenceId="AzureInsights-SignUpInitiate" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the mutifactor authentication step is completed -->
+        <OrchestrationStep Order="11" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="2" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail-DFP" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the profile edit step is initiated -->
+        <OrchestrationStep Order="12" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackProfileEditInitiate" TechnicalProfileReferenceId="AzureInsights-ProfileEditInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <!-- Track that the sign up step is completed -->
-      <OrchestrationStep Order="3" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="TrackSignUpComplete" TechnicalProfileReferenceId="AzureInsights-SignUpComplete" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <OrchestrationStep Order="13" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-    </OrchestrationSteps>
-  </SubJourney>
+        <!-- Track that the profile edit step is completed -->
+        <OrchestrationStep Order="14" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackProfileEditComplete" TechnicalProfileReferenceId="AzureInsights-ProfileEditComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-  <SubJourney Id="PasswordReset-Custom" Type="Call">
-    <OrchestrationSteps>
-      <!--Sample: Validate user's email address. Run this step only when user resets the password-->
-      <OrchestrationStep Order="1" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress-Custom" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <OrchestrationStep Order="15" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
 
-      <OrchestrationStep Order="2" Type="InvokeSubJourney">
-        <JourneyList>
-          <Candidate SubJourneyReferenceId="DFP-Verification" />
-        </JourneyList>
-      </OrchestrationStep>
+        <!-- Track that we have successfully sent a token -->
+        <OrchestrationStep Order="16" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <!-- Track that the mutifactor authentication step is initiated -->
-      <OrchestrationStep Order="3" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
-        </ClaimsExchanges>
-      </OrchestrationStep>        
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
 
-      <OrchestrationStep Order="4" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isActiveMfaSession</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
 
-      <!-- Track that the mutifactor authentication step is completed -->
-      <OrchestrationStep Order="5" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+  </UserJourneys>
+  <SubJourneys>
+    <SubJourney Id="SignUp-Custom" Type="Call">
+      <OrchestrationSteps>
 
-      <!-- Track that the password reset flow is started-->
-      <OrchestrationStep Order="6" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="TrackPasswordResetInitiate" TechnicalProfileReferenceId="AzureInsights-PasswordResetInitiate" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the sign up step is initiated -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackSignUpInitiate" TechnicalProfileReferenceId="AzureInsights-SignUpInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <!--Sample: Collect and persist a new password. Run this step only when user resets the password-->
-      <OrchestrationStep Order="7" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail-DFP" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <!-- Track that the password reset flow is completed-->
-      <OrchestrationStep Order="8" Type="ClaimsExchange">
-        <ClaimsExchanges>
-          <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the sign up step is completed -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackSignUpComplete" TechnicalProfileReferenceId="AzureInsights-SignUpComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-    </OrchestrationSteps>
-  </SubJourney>
+      </OrchestrationSteps>
+    </SubJourney>
 
-  <SubJourney Id="DFP-Verification" Type="Call">
-    <OrchestrationSteps>
-      <OrchestrationStep Order="1" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>bearerToken</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>            
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="AcquireAccessToken" TechnicalProfileReferenceId="REST-AcquireAccessToken" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+    <SubJourney Id="PasswordReset-Custom" Type="Call">
+      <OrchestrationSteps>
+        <!--Sample: Validate user's email address. Run this step only when user resets the password-->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PasswordResetUsingEmailAddressExchange" TechnicalProfileReferenceId="LocalAccountDiscoveryUsingEmailAddress-Custom" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="2" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="Dfp-LoginAccount" TechnicalProfileReferenceId="RestApi-DFP-LoginAccount" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <OrchestrationStep Order="2" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="DFP-Verification" />
+          </JourneyList>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="3" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>authenticationSource</Value>
-            <Value>localAccountAuthentication</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="TrackDfpResults" TechnicalProfileReferenceId="AzureInsights-DfpResults" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="4" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Value>Reject</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="Dfp-LoginAccountStatus-Rejected" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Rejected" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMfaSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="5" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Value>Approve</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="Dfp-LoginAccountStatus-Approved" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Approved" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the mutifactor authentication step is completed -->
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="6" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Value>Challenge</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="Dfp-LoginAccountStatus-Pending" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Pending" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the password reset flow is started-->
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackPasswordResetInitiate" TechnicalProfileReferenceId="AzureInsights-PasswordResetInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="7" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Value>Reject</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="ShowMessage-SignInRejected" TechnicalProfileReferenceId="SelfAsserted-ShowMessage-SignInRejected" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!--Sample: Collect and persist a new password. Run this step only when user resets the password-->
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="8" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Value>Reject</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="ShowMessage-SignupRejected" TechnicalProfileReferenceId="SelfAsserted-ShowMessage-SignupRejected" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+        <!-- Track that the password reset flow is completed-->
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-      <OrchestrationStep Order="9" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Value>Challenge</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
 
-      <OrchestrationStep Order="10" Type="ClaimsExchange">
-        <Preconditions>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>objectId</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-            <Value>isSignupFlow</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-          <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
-            <Value>dfp_merchantRuleDecision</Value>
-            <Value>Challenge</Value>
-            <Action>SkipThisOrchestrationStep</Action>
-          </Precondition>
-        </Preconditions>
-        <ClaimsExchanges>
-          <ClaimsExchange Id="Dfp-LoginAccountStatus-Approved-AfterChallenge" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Approved" />
-        </ClaimsExchanges>
-      </OrchestrationStep>
-    </OrchestrationSteps>
-  </SubJourney>
+    <SubJourney Id="DFP-Verification" Type="Call">
+      <OrchestrationSteps>
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>bearerToken</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AcquireAccessToken" TechnicalProfileReferenceId="REST-AcquireAccessToken" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-</SubJourneys>
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="Dfp-LoginAccount" TechnicalProfileReferenceId="RestApi-DFP-LoginAccount" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
 
-  
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>authenticationSource</Value>
+              <Value>localAccountAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackDfpResults" TechnicalProfileReferenceId="AzureInsights-DfpResults" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Reject</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="Dfp-LoginAccountStatus-Rejected" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Rejected" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Approve</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="Dfp-LoginAccountStatus-Approved" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Approved" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Challenge</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="Dfp-LoginAccountStatus-Pending" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Pending" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Reject</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="ShowMessage-SignInRejected" TechnicalProfileReferenceId="SelfAsserted-ShowMessage-SignInRejected" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Reject</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="ShowMessage-SignupRejected" TechnicalProfileReferenceId="SelfAsserted-ShowMessage-SignupRejected" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="9" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Challenge</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="10" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Challenge</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="Dfp-LoginAccountStatus-Approved-AfterChallenge" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Approved" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
+
+  </SubJourneys>
+
+
 </TrustFrameworkPolicy>

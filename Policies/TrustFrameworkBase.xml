@@ -359,7 +359,7 @@
       <!-- SECTION III: Additional claims that can be collected from the users, stored in the directory, and sent in the token. Add additional claims here. -->
 
       <ClaimType Id="givenName">
-        <DisplayName>Given Name</DisplayName>
+        <DisplayName>First Name</DisplayName>
         <DataType>string</DataType>
         <DefaultPartnerClaimTypes>
           <Protocol Name="OAuth2" PartnerClaimType="given_name" />
@@ -371,7 +371,7 @@
       </ClaimType>
 
       <ClaimType Id="surname">
-        <DisplayName>Surname</DisplayName>
+        <DisplayName>Last Name</DisplayName>
         <DataType>string</DataType>
         <DefaultPartnerClaimTypes>
           <Protocol Name="OAuth2" PartnerClaimType="family_name" />
