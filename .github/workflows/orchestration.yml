@@ -19,7 +19,7 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/policy-deployment.yml
     with:
-      tgtenv: ${ { github.event.inputs.environment } }
+      tgtenv: ${{github.event.inputs.environment}}
     secrets: inherit
 
   deploy-to-dev:
