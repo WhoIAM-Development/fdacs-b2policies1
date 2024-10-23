@@ -38,6 +38,7 @@
         <OutputClaim ClaimTypeReferenceId="dfp_merchantRuleDecision" />
         <OutputClaim ClaimTypeReferenceId="dfp_DeviceCountryCode" />
         <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+        <OutputClaim ClaimTypeReferenceId="MFAOptions" />
         <OutputClaim ClaimTypeReferenceId="identityProvider" />
         <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
         <OutputClaim ClaimTypeReferenceId="buildId" AlwaysUseDefaultValue="true" DefaultValue="{Settings:Build.BuildNumber}_{Settings:Release.ReleaseName}" />

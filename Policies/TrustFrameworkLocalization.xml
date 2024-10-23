@@ -71,6 +71,34 @@
           <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
+
+      <ContentDefinition Id="api.selfasserted.totp.verify">
+        <LoadUri>{Settings:UIBaseUrl}selfAssertedTotpVerify.html?ver={Settings:Build.BuildNumber}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.9</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Collect information from user page</Item>
+        </Metadata>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.selfasserted.totp.register">
+        <LoadUri>{Settings:UIBaseUrl}selfAssertedTotpRegister.html?ver={Settings:Build.BuildNumber}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.9</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Collect information from user page</Item>
+        </Metadata>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.selfasserted.mfa.choosemfa">
+        <LoadUri>{Settings:UIBaseUrl}showMfaOptions.html?ver={Settings:Build.BuildNumber}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.6</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Collect information from user page</Item>
+        </Metadata>
+      </ContentDefinition>
+      
     </ContentDefinitions>
 
     <Localization Enabled="true">
