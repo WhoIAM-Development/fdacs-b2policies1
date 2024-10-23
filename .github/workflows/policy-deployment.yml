@@ -22,8 +22,38 @@ jobs:
       - run: echo "💡 var - POLICYSET - ${{vars.POLICYSET}}"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        name: Checkout code
       - uses: actions/checkout@v3
-      
+
+      # Install Node.js
+        name: Install Node.js
+      - uses: actions/setup-node@v3
+        with:
+           node-version: '18.13.0'
+           
+      # NPM Install
+      - name: NPM Install
+        run: npm install
+        working-directory: ./localization/buildtool
+
+      # Build policies
+      - name: Build policies
+        run: npm run build
+        working-directory: ./localization/buildtool
+        
+      # Copy files to staging directory
+      - name: Copy build artifacts to staging directory
+        run: |
+           mkdir -p ${{ github.workspace }}/staging
+           cp -r ./dist/** ${{ github.workspace }}/staging
+
+        # Upload artifacts
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: policies
+          path: ${{ github.workspace }}/staging
+        
       - uses: cschleiden/replace-tokens@v1
         with:
           tokenPrefix: '{Settings:'
