@@ -2884,9 +2884,15 @@
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
           </ClaimsExchanges>
+        </OrchestrationStep>        
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="4" Type="InvokeSubJourney">
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>objectIdFromSession</Value>
@@ -2907,7 +2913,7 @@
           </JourneyList>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+        <OrchestrationStep Order="6" Type="InvokeSubJourney">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>isActiveMfaSession-Any</Value>
@@ -2940,28 +2946,22 @@
         </OrchestrationStep>-->
 
         <!-- Track that the password reset flow is started-->
-        <OrchestrationStep Order="6" Type="ClaimsExchange">
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackPasswordResetInitiate" TechnicalProfileReferenceId="AzureInsights-PasswordResetInitiate" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="7" Type="ClaimsExchange">
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
           <ClaimsExchanges>
-            <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
+            <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId-NoSSO" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
         <!-- Track that the password reset flow is completed-->
-        <OrchestrationStep Order="8" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-
         <OrchestrationStep Order="9" Type="ClaimsExchange">
           <ClaimsExchanges>
-            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+            <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
@@ -3137,6 +3137,137 @@
 
         <!-- Track that we have successfully sent a token -->
         <OrchestrationStep Order="14" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+
+    <UserJourney Id="ChangeMfa-UserJourney">
+      <OrchestrationSteps>
+
+        <!-- Track that we have received an authentication request -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationInitiate" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!--<OrchestrationStep Order="6" Type="ClaimsExchange">
+            <Preconditions>
+              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+                <Value>authenticationSource</Value>
+                <Value>localAccountAuthentication</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <ClaimsExchanges>
+              <ClaimsExchange Id="AADUserRead" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
+            </ClaimsExchanges>
+          </OrchestrationStep>-->
+
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the authentication step is completed -->
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="8" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectIdFromSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="DFP-Verification" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="9" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMfaSession-Any</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="EnforceMFA" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="10" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="ChangeMFA-SubJourney" />
+          </JourneyList>
+        </OrchestrationStep>        
+
+        <OrchestrationStep Order="11" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+        <!-- Track that we have successfully sent a token -->
+        <OrchestrationStep Order="12" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
           </ClaimsExchanges>
@@ -4102,6 +4233,368 @@
           <ClaimsExchanges>
             <ClaimsExchange Id="AADUserWritePhoneAndMFAOptionPartialWithObjectId" TechnicalProfileReferenceId="AAD-UserWritePhoneNumberAndMFAOptionPartialUsingObjectId" />
           </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="SetMfaActions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="IdentifyNumberOfRegisteredMfaActions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- if numberOfRegisteredMfa=0, Available mfa action is only 'Add' -->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>0</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetAvailableMfaActions-Add" TechnicalProfileReferenceId="SetAvailableMfaActions-Add" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- if numberOfRegisteredMfa=1 Available mfa actions are 'Add/Update' -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>1</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetAvailableMfaActions-Add-Update" TechnicalProfileReferenceId="SetAvailableMfaActions-Add-Update" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- if numberOfRegisteredMfa=2, Available mfa actions are 'Update/Remove' -->
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>2</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetAvailableMfaActions-Update-Remove" TechnicalProfileReferenceId="SetAvailableMfaActions-Update-Remove" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="ChangeMFA-SubJourney" Type="Call">
+      <OrchestrationSteps>
+
+        <!-- Track that the change mfa step is initiated -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackChangeMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-ChangeMultifactorInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="SetMfaActions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.selector">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>changeMfa_AvailableActions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsProviderSelections DisplayOption="ShowSingleProvider">
+            <ClaimsProviderSelection TargetClaimsExchangeId="MfaActionExchange-Add" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="MfaActionExchange-Update" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="MfaActionExchange-Remove" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.selector">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>changeMfa_AvailableActions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="MfaActionExchange-Add" TechnicalProfileReferenceId="SetChangeMfaAction-Add" />
+            <ClaimsExchange Id="MfaActionExchange-Update" TechnicalProfileReferenceId="SetChangeMfaAction-Update" />
+            <ClaimsExchange Id="MfaActionExchange-Remove" TechnicalProfileReferenceId="SetChangeMfaAction-Remove" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>changeMfa_Action</Value>
+              <Value>remove</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="RemoveRegisteredMfaOptions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="6" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>changeMfa_Action</Value>
+              <Value>add</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="RegisterNewMfaOptions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="7" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>changeMfa_Action</Value>
+              <Value>update</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="UpdateRegisteredMfaOptions" />
+          </JourneyList>
+        </OrchestrationStep>        
+
+        <!-- Track that the change mfa step is completed -->
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackChangeMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-ChangeMultifactorComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SelfAssertedShowMfaSuccessfulExchange" TechnicalProfileReferenceId="SelfAsserted-ShowMessage-MfaUpdateSuccessful" />
+          </ClaimsExchanges>
+        </OrchestrationStep> -->
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="RegisterNewMfaOptions-SetClaimsProvider-TotpSms" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.add">
+          <ClaimsProviderSelections DisplayOption="ShowSingleProvider">
+            <ClaimsProviderSelection TargetClaimsExchangeId="TotpMfaExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="PhoneMfaExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.add">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TotpMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Totp-IfAbsent" />
+            <ClaimsExchange Id="PhoneMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Phone-IfAbsent" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="RegisterNewMfaOptions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="RegisterNewMfaOptions-SetClaimsProvider-TotpSms" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-SetMFASetupFlowExchange" TechnicalProfileReferenceId="TP-SetMFASetupFlow" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>MFAOptions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-CopyMFAOptionsToMFAOptionsPartialExchange" TechnicalProfileReferenceId="TP-CopyMFAOptionsToMFAOptionsPartial" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="MFA-SMS-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="TotpFactor-RegisterInput-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="RemoveRegisteredMfaOptions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.remove">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="TotpMfaExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="PhoneMfaExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.remove">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TotpMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Totp" />
+            <ClaimsExchange Id="PhoneMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Phone" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RemovePhoneFromUserMfaOptionsExchange" TechnicalProfileReferenceId="RemovePhoneFromUserMfaOptions" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RemoveTotpFromUserMfaOptionsExchange" TechnicalProfileReferenceId="RemoveTotpFromUserMfaOptions" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADWriteUserMfaOptionsByObjectIdExchange" TechnicalProfileReferenceId="AAD-WriteMfaOptionsUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="UpdateRegisteredMfaOptions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.update">
+          <ClaimsProviderSelections DisplayOption="ShowSingleProvider">
+            <ClaimsProviderSelection TargetClaimsExchangeId="TotpMfaExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="PhoneMfaExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.update">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TotpMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Totp" />
+            <ClaimsExchange Id="PhoneMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Phone" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-SetMFASetupFlowExchange" TechnicalProfileReferenceId="TP-SetMFASetupFlow" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-CopyMFAOptionsToMFAOptionsPartialExchange" TechnicalProfileReferenceId="TP-CopyMFAOptionsToMFAOptionsPartial" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="MFA-SMS-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="6" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="TotpFactor-RegisterInput-NoSSO" />
+          </JourneyList>
         </OrchestrationStep>
 
       </OrchestrationSteps>

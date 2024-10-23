@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="{Settings:TenantShort}.onmicrosoft.com"
+  PolicyId="B2C_1A_{Settings:PolicySet}ChangeMfa"
+  PublicPolicyUri="http://{Settings:TenantShort}.onmicrosoft.com/B2C_1A_{Settings:PolicySet}ChangeMfa"
+  DeploymentMode="{Settings:DeploymentMode}"
+  UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights">
+
+  <!-- Build Number: {Settings:Build.BuildNumber}_{Settings:Release.ReleaseName} -->
+
+  <BasePolicy>
+    <TenantId>{Settings:TenantShort}.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_{Settings:PolicySet}TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="ChangeMfa-UserJourney" />
+    <UserJourneyBehaviors>
+      <JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="{Settings:AppInsightsInstrumentationKey}" DeveloperMode="{Settings:AppInsightsDeveloperMode}" ClientEnabled="false" ServerEnabled="true" TelemetryVersion="1.0.0" />
+      {Settings:ScriptExecutionElement}
+    </UserJourneyBehaviors>
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="signInNames.emailAddress" PartnerClaimType="email" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="dfp_botScore_string" PartnerClaimType="dfp_botScore"/>
+        <OutputClaim ClaimTypeReferenceId="dfp_riskScore_string" PartnerClaimType="dfp_riskScore"/>
+        <OutputClaim ClaimTypeReferenceId="dfp_merchantRuleDecision" />
+        <OutputClaim ClaimTypeReferenceId="dfp_DeviceCountryCode" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+        <OutputClaim ClaimTypeReferenceId="identityProvider" />
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
+        <OutputClaim ClaimTypeReferenceId="buildId" AlwaysUseDefaultValue="true" DefaultValue="{Settings:Build.BuildNumber}_{Settings:Release.ReleaseName}" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>

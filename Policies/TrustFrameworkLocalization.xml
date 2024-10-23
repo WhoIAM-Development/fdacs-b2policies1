@@ -98,6 +98,46 @@
           <Item Key="DisplayName">Collect information from user page</Item>
         </Metadata>
       </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.selector">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=selector&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.add">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=add&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.update">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=update&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.remove">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=remove&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+      </ContentDefinition>
       
     </ContentDefinitions>
 
