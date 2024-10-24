@@ -1,0 +1,41 @@
+{
+	"localizations": [
+		{
+			"file": "TrustFrameworkLocalization.xml"
+		}
+	],
+	"contentDefinitionMappings": [
+		{
+			"contentDefinitionId": "api.signuporsignin",
+			"localizedResourcesReferenceId": "api.signuporsignin"
+		},
+		{
+			"contentDefinitionId": "api.localaccountsignup",
+			"localizedResourcesReferenceId": "api.localaccountsignup"
+		},
+		{
+			"contentDefinitionId": "api.socialccountsignup",
+			"localizedResourcesReferenceId": "api.socialccountsignup"
+		},
+		{
+			"contentDefinitionId": "api.localaccountpasswordreset",
+			"localizedResourcesReferenceId": "api.localaccountpasswordreset"
+		},
+		{
+			"contentDefinitionId": "api.idpselections",
+			"localizedResourcesReferenceId": "api.idpselections"
+		},
+		{
+			"contentDefinitionId": "api.localaccountsignin",
+			"localizedResourcesReferenceId": "api.localaccountsignin"
+		},
+		{
+			"contentDefinitionId": "api.selfasserted.profileupdate",
+			"localizedResourcesReferenceId": "api.selfasserted.profileupdate"
+		},
+		{
+			"contentDefinitionId": "api.phonefactor",
+			"localizedResourcesReferenceId": "api.phonefactor"
+		}
+	]
+}

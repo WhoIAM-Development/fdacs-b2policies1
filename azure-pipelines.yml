@@ -10,27 +10,41 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+
 steps:
-- task: CopyFiles@2
+- task: NodeTool@0
+  displayName: 'Install Node.js'
   inputs:
-    Contents: '*/*.xml'
+    versionSpec: '18.13.0'
+
+- task: Npm@1
+  displayName: 'NPM Install'
+  inputs:
+    command: 'install'
+    workingDir: './localization/buildtool'
+
+- task: Npm@1
+  displayName: 'Build policies'
+  inputs:
+    command: 'custom'
+    customCommand: 'run build'
+    workingDir: './localization/buildtool'
+
+
+#Copy Files
+- task: CopyFiles@2
+  displayName: 'Copy build artifacts to staging directory'
+  inputs:
+    Contents: |
+      dist/**
     TargetFolder: $(Build.ArtifactStagingDirectory)
     CleanTargetFolder: true
     OverWrite: true
 
-- task: qetza.replacetokens.replacetokens-task.replacetokens@3
-  inputs:
-    targetFiles: '$(Build.ArtifactStagingDirectory)/*/*.xml'
-    encoding: 'auto'
-    escapeType: 'none'
-    writeBOM: false
-    actionOnMissing: 'continue'
-    keepToken: true
-    tokenPrefix: '{Settings:'
-    tokenSuffix: '}'
-
+#Publish Artifact
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish build artifacts'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/dist'
+    ArtifactName: 'policies'
     publishLocation: 'Container'

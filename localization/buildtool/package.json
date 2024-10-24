@@ -1,0 +1,29 @@
+{
+  "name": "policy-localization-nodejs",
+  "version": "1.0.0",
+  "description": "Azure AD B2C Policy Localization tool using NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://whoiamdev.visualstudio.com/WhoIAM%20-%20Internal/_git/Policy-Localization-NodeJS"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-format-html": "^2.1.0",
+    "gulp-ignore": "^3.0.0",
+    "gulp-rename": "^2.0.0",
+    "path": "^0.12.7",
+    "read-excel-file": "^5.6.1",
+    "through2": "^4.0.2"
+  }
+}
