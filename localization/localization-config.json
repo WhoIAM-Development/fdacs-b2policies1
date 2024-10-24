@@ -14,24 +14,12 @@
 			"localizedResourcesReferenceId": "api.localaccountsignup"
 		},
 		{
-			"contentDefinitionId": "api.selfasserted",
-			"localizedResourcesReferenceId": "api.selfasserted"
-		},
-		{
-			"contentDefinitionId": "api.selfasserted.passwordupdate",
-			"localizedResourcesReferenceId": "api.selfasserted.passwordupdate"
+			"contentDefinitionId": "api.socialccountsignup",
+			"localizedResourcesReferenceId": "api.socialccountsignup"
 		},
 		{
 			"contentDefinitionId": "api.localaccountpasswordreset",
 			"localizedResourcesReferenceId": "api.localaccountpasswordreset"
-		},
-		{
-			"contentDefinitionId": "api.emailverification",
-			"localizedResourcesReferenceId": "api.emailverification"
-		},
-		{
-			"contentDefinitionId": "api.emailverification.signup",
-			"localizedResourcesReferenceId": "api.emailverification.signup"
 		},
 		{
 			"contentDefinitionId": "api.idpselections",
@@ -44,6 +32,10 @@
 		{
 			"contentDefinitionId": "api.selfasserted.profileupdate",
 			"localizedResourcesReferenceId": "api.selfasserted.profileupdate"
+		},
+		{
+			"contentDefinitionId": "api.phonefactor",
+			"localizedResourcesReferenceId": "api.phonefactor"
 		}
 	]
 }
