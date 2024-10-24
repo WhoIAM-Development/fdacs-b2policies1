@@ -58,8 +58,7 @@
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
-      <ContentDefinition Id="api.mfaedit.action
-">
+      <ContentDefinition Id="api.phonefactor">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.phonefactor.en" />
         </LocalizedResourcesReferences>
@@ -73,7 +72,7 @@
           <Item Key="DisplayName">Collect information from user page</Item>
         </Metadata>
         <LocalizedResourcesReferences MergeBehavior="Prepend">
-          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.totp.verify" />
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.totp.verify.en" />
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
@@ -85,7 +84,7 @@
           <Item Key="DisplayName">Collect information from user page</Item>
         </Metadata>
         <LocalizedResourcesReferences MergeBehavior="Prepend">
-          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.totp.register" />
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.totp.register.en" />
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
@@ -372,6 +371,32 @@
 
       <!-- Edit profile page English-->
       <LocalizedResources Id="api.selfasserted.en">
+        <LocalizedStrings>
+          <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="DisplayName">Display Name</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="UserHelpText">Your display name.</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="surname" StringId="DisplayName">Surname</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="surname" StringId="UserHelpText">Your surname (also known as family name or last name).</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="DisplayName">Given Name</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="UserHelpText">Your given name (also known as first name).</LocalizedString>
+          <LocalizedString ElementType="UxElement" StringId="button_continue">Continue</LocalizedString>
+          <LocalizedString ElementType="UxElement" StringId="button_cancel">Cancel</LocalizedString>
+        </LocalizedStrings>
+      </LocalizedResources>
+
+      <LocalizedResources Id="api.selfasserted.totp.register.en">
+        <LocalizedStrings>
+          <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="DisplayName">Display Name</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="UserHelpText">Your display name.</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="surname" StringId="DisplayName">Surname</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="surname" StringId="UserHelpText">Your surname (also known as family name or last name).</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="DisplayName">Given Name</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="UserHelpText">Your given name (also known as first name).</LocalizedString>
+          <LocalizedString ElementType="UxElement" StringId="button_continue">Continue</LocalizedString>
+          <LocalizedString ElementType="UxElement" StringId="button_cancel">Cancel</LocalizedString>
+        </LocalizedStrings>
+      </LocalizedResources>
+
+      <LocalizedResources Id="api.selfasserted.totp.verify.en">
         <LocalizedStrings>
           <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="DisplayName">Display Name</LocalizedString>
           <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="UserHelpText">Your display name.</LocalizedString>
