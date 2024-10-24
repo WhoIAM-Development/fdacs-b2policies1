@@ -58,7 +58,8 @@
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
-      <ContentDefinition Id="api.phonefactor">
+      <ContentDefinition Id="api.mfaedit.action
+">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.phonefactor.en" />
         </LocalizedResourcesReferences>
@@ -72,7 +73,7 @@
           <Item Key="DisplayName">Collect information from user page</Item>
         </Metadata>
         <LocalizedResourcesReferences MergeBehavior="Prepend">
-          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.totp.verify" />
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
@@ -84,7 +85,7 @@
           <Item Key="DisplayName">Collect information from user page</Item>
         </Metadata>
         <LocalizedResourcesReferences MergeBehavior="Prepend">
-          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.totp.register" />
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
