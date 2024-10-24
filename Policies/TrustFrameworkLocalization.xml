@@ -19,58 +19,165 @@
       <ContentDefinition Id="api.signuporsignin">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.signuporsignin.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
       <ContentDefinition Id="api.localaccountsignup">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.localaccountsignup.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
       <ContentDefinition Id="api.socialccountsignup">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.socialccountsignup.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
       <ContentDefinition Id="api.localaccountpasswordreset">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.localaccountpasswordreset.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
       <ContentDefinition Id="api.idpselections">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.idpselections.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
       <ContentDefinition Id="api.localaccountsignin">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.localaccountsignin.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
       <ContentDefinition Id="api.selfasserted.profileupdate">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.profileupdate.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
 
       <ContentDefinition Id="api.phonefactor">
         <LocalizedResourcesReferences MergeBehavior="Prepend">
           <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.phonefactor.en" />
-          <!-- Add more languages here -->
         </LocalizedResourcesReferences>
       </ContentDefinition>
+
+      <ContentDefinition Id="api.selfasserted.totp.verify">
+        <LoadUri>{Settings:UIBaseUrl}selfAssertedTotpVerify.html?ver={Settings:Build.BuildNumber}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.9</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Collect information from user page</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.selfasserted.totp.register">
+        <LoadUri>{Settings:UIBaseUrl}selfAssertedTotpRegister.html?ver={Settings:Build.BuildNumber}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.9</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Collect information from user page</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.selfasserted.mfa.choosemfa">
+        <LoadUri>{Settings:UIBaseUrl}showMfaOptions.html?ver={Settings:Build.BuildNumber}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.6</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Collect information from user page</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.selector">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=selector&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.add">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=add&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.update">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=update&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.idpselections.mfa.remove">
+        <LoadUri>{Settings:UIBaseUrl}mfaSelector.html?ver={Settings:Build.BuildNumber}&amp;mfaType=remove&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.2.1</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />          
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.registerMfa.VerifyEmail">
+        <LoadUri>{Settings:UIBaseUrl}verifyEmail.html?ver={Settings:Build.BuildNumber}&amp;mfaType=remove&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.7</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Multi Factor Authentication</Item>
+          <Item Key="language.intro">Multi Factor Authentication</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />          
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+
+      <ContentDefinition Id="api.localaccountpasswordreset.email">
+        <LoadUri>{Settings:UIBaseUrl}verifyEmail.html?ver={Settings:Build.BuildNumber}&amp;mfaType=remove&amp;appName={Claim:ApplicationNameClaim}</LoadUri>
+        <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
+        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.7</DataUri>
+        <Metadata>
+          <Item Key="DisplayName">Local account change password page</Item>
+          <Item Key="language.intro">Local account change password page</Item>
+        </Metadata>
+        <LocalizedResourcesReferences MergeBehavior="Prepend">
+          <LocalizedResourcesReference Language="en" LocalizedResourcesReferenceId="api.selfasserted.en" />          
+        </LocalizedResourcesReferences>
+      </ContentDefinition>
+      
     </ContentDefinitions>
 
     <Localization Enabled="true">
@@ -250,6 +357,20 @@
 
       <!-- Edit profile page English-->
       <LocalizedResources Id="api.selfasserted.profileupdate.en">
+        <LocalizedStrings>
+          <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="DisplayName">Display Name</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="UserHelpText">Your display name.</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="surname" StringId="DisplayName">Surname</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="surname" StringId="UserHelpText">Your surname (also known as family name or last name).</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="DisplayName">Given Name</LocalizedString>
+          <LocalizedString ElementType="ClaimType" ElementId="givenName" StringId="UserHelpText">Your given name (also known as first name).</LocalizedString>
+          <LocalizedString ElementType="UxElement" StringId="button_continue">Continue</LocalizedString>
+          <LocalizedString ElementType="UxElement" StringId="button_cancel">Cancel</LocalizedString>
+        </LocalizedStrings>
+      </LocalizedResources>
+
+      <!-- Edit profile page English-->
+      <LocalizedResources Id="api.selfasserted.en">
         <LocalizedStrings>
           <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="DisplayName">Display Name</LocalizedString>
           <LocalizedString ElementType="ClaimType" ElementId="displayName" StringId="UserHelpText">Your display name.</LocalizedString>

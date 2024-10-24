@@ -636,11 +636,21 @@
       <DisplayName>PhoneFactor</DisplayName>
       <TechnicalProfiles>
         <TechnicalProfile Id="PhoneFactor-InputOrVerify">
-          <DisplayName>PhoneFactor</DisplayName>
+          <DisplayName>PhoneFactor Input or Verify</DisplayName>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="strongAuthenticationPhoneNumber" />
+          </InputClaims>
+          <IncludeTechnicalProfile ReferenceId="PhoneFactor-InputOnly" />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-MFA" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="PhoneFactor-InputOnly">
+          <DisplayName>PhoneFactor Input Only</DisplayName>
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.PhoneFactorProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
           <Metadata>
             <Item Key="ContentDefinitionReferenceId">api.phonefactor</Item>
             <Item Key="ManualPhoneNumberEntryAllowed">true</Item>
+            <Item Key="setting.showCancelButton">false</Item>
           </Metadata>
           <CryptographicKeys>
             <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
@@ -650,7 +660,6 @@
           </InputClaimsTransformations>
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="userIdForMFA" PartnerClaimType="UserId" />
-            <InputClaim ClaimTypeReferenceId="strongAuthenticationPhoneNumber" />
           </InputClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" PartnerClaimType="Verified.OfficePhone" />
@@ -658,6 +667,16 @@
             <OutputClaim ClaimTypeReferenceId="isActiveMFASession" DefaultValue="true"/>
           </OutputClaims>
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-MFA" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="PhoneFactor-InputOrVerify-NoSSO">
+          <IncludeTechnicalProfile ReferenceId="PhoneFactor-InputOrVerify" />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="PhoneFactor-InputOnly-NoSSO">
+          <IncludeTechnicalProfile ReferenceId="PhoneFactor-InputOnly" />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
         </TechnicalProfile>
 
       </TechnicalProfiles>
@@ -822,7 +841,7 @@
             <PersistedClaim ClaimTypeReferenceId="newPassword" PartnerClaimType="password" />
 
             <!-- If the user stepped up during password reset, their phone number should be persisted for future authentication requests. -->
-            <PersistedClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" PartnerClaimType="strongAuthenticationPhoneNumber" />
+            <!-- <PersistedClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" PartnerClaimType="strongAuthenticationPhoneNumber" /> -->
 
           </PersistedClaims>
           <IncludeTechnicalProfile ReferenceId="AAD-Common" />
@@ -1091,6 +1110,11 @@
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
         </TechnicalProfile>
 
+        <TechnicalProfile Id="LocalAccountWritePasswordUsingObjectId-NoSSO">
+          <IncludeTechnicalProfile ReferenceId="LocalAccountWritePasswordUsingObjectId"/>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
         <TechnicalProfile Id="LocalAccountWritePasswordUsingObjectId">
           <DisplayName>Change password (username)</DisplayName>
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
@@ -1102,9 +1126,7 @@
           </CryptographicKeys>
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="objectId" />
-
-            <InputClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" />
-
+            <!-- <InputClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" /> -->
           </InputClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
@@ -1287,6 +1309,20 @@
         <TechnicalProfile Id="AzureInsights-ProfileEditComplete">
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="EventType" PartnerClaimType="eventName" DefaultValue="ProfileEditComplete" />
+          </InputClaims>
+          <IncludeTechnicalProfile ReferenceId="AzureInsights-Common" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AzureInsights-ChangeMultifactorInitiate">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="EventType" PartnerClaimType="eventName" DefaultValue="ChangeMultifactorInitiate" />
+          </InputClaims>
+          <IncludeTechnicalProfile ReferenceId="AzureInsights-Common" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AzureInsights-ChangeMultifactorComplete">
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="EventType" PartnerClaimType="eventName" DefaultValue="ChangeMultifactorComplete" />
           </InputClaims>
           <IncludeTechnicalProfile ReferenceId="AzureInsights-Common" />
         </TechnicalProfile>

@@ -287,7 +287,222 @@
         <UserInputType>TextBox</UserInputType>
       </ClaimType>
 
+      <ClaimType Id="email.readOnly">
+        <DisplayName>Email</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Email you entered</UserHelpText>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
 
+      <!--MFA Claims-->
+
+      <ClaimType Id="MFAOptions">
+        <DisplayName>MFA Options</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>CheckboxMultiSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Authenticator App" Value="totp" SelectByDefault="false" />
+          <Enumeration Text="SMS / Call" Value="sms" SelectByDefault="false" />
+          <!-- <Enumeration Text="Email" Value="email" SelectByDefault="false" /> -->
+        </Restriction>
+      </ClaimType>
+
+      <ClaimType Id="availablemfaOptions">
+        <DisplayName>Available mfa Options</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="MFAOptions_Registration">
+        <DisplayName>Select the multi-factor option(s) you would like to configure with your account.  It is recommended to setup more than one option.</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>CheckboxMultiSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Authenticator App" Value="totp" SelectByDefault="false" />
+          <Enumeration Text="SMS / Call" Value="sms" SelectByDefault="false" />
+          <!-- <Enumeration Text="Email" Value="email" SelectByDefault="false" /> -->
+        </Restriction>
+      </ClaimType>
+
+      <ClaimType Id="MFAOptions_Verification">
+        <DisplayName>Select the multi-factor option you would like to verify.</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>RadioSingleSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Authenticator App" Value="totp" SelectByDefault="false" />
+          <Enumeration Text="SMS / Call" Value="sms" SelectByDefault="false" />
+          <!-- <Enumeration Text="Email" Value="email" SelectByDefault="false" /> -->
+        </Restriction>
+      </ClaimType>
+
+      <ClaimType Id="smsMFASelected">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="totpMFASelected">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="emailMFASelected">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="isMFAConfigurationSetupFlow">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="MFAOptionsStringCollection">
+        <DisplayName>MFAOptions StringCollection</DisplayName>
+        <DataType>stringCollection</DataType>
+      </ClaimType>
+
+      <ClaimType Id="MFAOptionsPartial">
+        <DisplayName>MFAOptions string to be used to store currently completed mfa options as a comma delimited string</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>Readonly</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="MFAOptionsPartialStringCollection">
+        <DisplayName>MFAOptions StringCollection to be used to store currently completed mfa options</DisplayName>
+        <DataType>stringCollection</DataType>
+      </ClaimType>
+
+      <ClaimType Id="Verify_MFAOption_Phone">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="Verify_MFAOption_Email">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="Verify_MFAOption_TOTP">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="changeMfa_Action">
+        <DisplayName></DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Add help text here</UserHelpText>
+      </ClaimType>
+
+      <ClaimType Id="ChangeMFA_AvailableActions">
+        <DisplayName>Change MFA Available Actions</DisplayName>
+        <DataType>stringCollection</DataType>
+        <UserHelpText></UserHelpText>
+      </ClaimType>
+
+      <ClaimType Id="numberOfRegisteredMfa">
+        <DisplayName>Number of registered MFA</DisplayName>
+        <DataType>int</DataType>
+      </ClaimType>
+
+      <ClaimType Id="zeroClaim">
+        <DisplayName>Set value of this claim to zero and copy to number of available and registered mfa claims</DisplayName>
+        <DataType>int</DataType>
+      </ClaimType>
+
+      <ClaimType Id="Change_MFAOption_Phone">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="Change_MFAOption_TOTP">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="isActiveMfaSession-Any">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+
+      <ClaimType Id="isSelectedMfaValid">
+        <DisplayName></DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+      <!--MFA Claims ends-->
+
+
+      <!-- #region TOTP claims-->
+
+      <ClaimType Id="totpIdentifier">
+        <DisplayName>UserId, Phone number or Email which can present the user's identity</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText>UserId, Phone number or Email which can be used to create QR code identity.</AdminHelpText>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="numberOfAvailableDevices">
+        <DisplayName>Number of available devices:</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="QrCodeScanInstruction">
+        <DisplayName>Once you've downloaded the Authenticator app, you can use any of the methods below to continue with enrollment.</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="QrCodeVerifyInstruction">
+        <DisplayName>Enter the verification code from your authenticator app​.</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="qrCodeContent">
+        <DisplayName>QR Code Text</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>QR code text</UserHelpText>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="secretKey">
+        <DisplayName>If you cant't scan the image, enter the Secret Key:</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>QR code secret</UserHelpText>
+        <UserInputType>Paragraph</UserInputType>
+      </ClaimType>
+
+      <ClaimType Id="otpCode">
+        <DisplayName>Enter your 6 digit code</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Enter the 6-digit verification code generated by the the Authenticator app in the box</UserHelpText>
+        <UserInputType>TextBox</UserInputType>
+        <Restriction>
+          <Pattern RegularExpression="^[0-9]{6}$" HelpText="Enter the 6-digit verification code generated by the the Authenticator app in the box" />
+        </Restriction>
+      </ClaimType>
+
+      <ClaimType Id="uriLabel">
+        <DisplayName>Uri Label</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+
+      <ClaimType Id="issuer">
+        <DisplayName>Issuer</DisplayName>
+        <DataType>string</DataType>
+      </ClaimType>
+
+      <ClaimType Id="UserId">
+        <DisplayName>Username</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText />
+        <UserHelpText>Your username.</UserHelpText>
+        <UserInputType>TextBox</UserInputType>
+        <Restriction>
+          <Pattern RegularExpression="^[a-zA-Z0-9]+[a-zA-Z0-9_-]*$" HelpText="The username you have provided is not valid. It must begin with an alphabetical character or number, and can only contain alphanumeric characters and the following symbols: _ -" />
+        </Restriction>
+      </ClaimType>
+
+      <!-- #endregion TOTP Claims-->
     </ClaimsSchema>
     <ClaimsTransformations>
 
@@ -357,6 +572,484 @@
           <OutputClaim ClaimTypeReferenceId="userMessage" TransformationClaimType="createdClaim" />
         </OutputClaims>
       </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CopyEmailtoEmailReadonly" TransformationMethod="CopyClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="email.readOnly" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CopySignInNameEmailToEmail" TransformationMethod="CopyClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="signInNames.emailAddress" TransformationClaimType="inputClaim"/>
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="email" TransformationClaimType="outputClaim"/>
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <!-- MFA Option Transforms -->
+
+      <ClaimsTransformation Id="CopyMfaOptionsToAvailableMfaOptions" TransformationMethod="CopyClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="availablemfaOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="SetAddToAvailableMfaActions" TransformationMethod="AddParameterToStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" TransformationClaimType="collection" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="item" DataType="string" Value="add" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" TransformationClaimType="collection" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="SetUpdateToAvailableMfaActions" TransformationMethod="AddParameterToStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" TransformationClaimType="collection" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="item" DataType="string" Value="update" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" TransformationClaimType="collection" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="SetRemoveToAvailableMfaActions" TransformationMethod="AddParameterToStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" TransformationClaimType="collection" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="item" DataType="string" Value="remove" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" TransformationClaimType="collection" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AutoIncrementNumberOfRegisteredMfa" TransformationMethod="AdjustNumber">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="numberOfRegisteredMfa" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="Operator" DataType="string" Value="INCREMENT" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="numberOfRegisteredMfa" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CopyZeroClaimToNumberOfRegisteredMfa" TransformationMethod="CopyClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="zeroClaim" TransformationClaimType="inputClaim"/>
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="numberOfRegisteredMfa" TransformationClaimType="outputClaim"/>
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ClearPhoneWithTrailingCommaFromUserMfaOptions" TransformationMethod="StringReplace">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="oldValue" DataType="string" Value="sms," />
+          <InputParameter Id="newValue" DataType="string" Value="" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ClearPhoneWithLeadingCommaFromUserMfaOptions" TransformationMethod="StringReplace">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="mfaOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="oldValue" DataType="string" Value=",sms" />
+          <InputParameter Id="newValue" DataType="string" Value="" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="mfaOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ClearPhoneFromUserMfaOptions" TransformationMethod="StringReplace">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="oldValue" DataType="string" Value="sms" />
+          <InputParameter Id="newValue" DataType="string" Value="" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ClearTotpWithTrailingCommaFromUserMfaOptions" TransformationMethod="StringReplace">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="oldValue" DataType="string" Value="totp," />
+          <InputParameter Id="newValue" DataType="string" Value="" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ClearTotpWithLeadingCommaFromUserMfaOptions" TransformationMethod="StringReplace">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="mfaOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="oldValue" DataType="string" Value=",totp" />
+          <InputParameter Id="newValue" DataType="string" Value="" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="mfaOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ClearTotpFromUserMfaOptions" TransformationMethod="StringReplace">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="oldValue" DataType="string" Value="totp" />
+          <InputParameter Id="newValue" DataType="string" Value="" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CheckIfPhoneMFASelected" TransformationMethod="StringContains">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="contains" DataType="string" Value="sms" />
+          <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="smsMFASelected" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CheckIfTOTPMFASelected" TransformationMethod="StringContains">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="contains" DataType="string" Value="totp" />
+          <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="totpMFASelected" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CheckIfEmailMFASelected" TransformationMethod="StringContains">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="contains" DataType="string" Value="email" />
+          <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="emailMFASelected" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="Verification-CheckIfEmailMFASelected" TransformationMethod="StringContains">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions_Verification" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="contains" DataType="string" Value="email" />
+          <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Email" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="Verification-CheckIfPhoneMFASelected" TransformationMethod="StringContains">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions_Verification" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="contains" DataType="string" Value="sms" />
+          <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Phone" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="Verification-CheckIfTOTPMFASelected" TransformationMethod="StringContains">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions_Verification" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="contains" DataType="string" Value="totp" />
+          <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_TOTP" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ConvertMFAStringCollectionToCommaDelimiterString" TransformationMethod="StringJoin">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptionsStringCollection" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter DataType="string" Id="delimiter" Value="," />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ConvertMFAOptionsToStringCollection" TransformationMethod="StringSplit">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter DataType="string" Id="delimiter" Value="," />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptionsStringCollection" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AddSMStoMFAOptionsPartialCollection" TransformationMethod="AddParameterToStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="collection" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="item" DataType="string" Value="sms" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="collection" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AddTOTPtoMFAOptionsPartialCollection" TransformationMethod="AddParameterToStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="collection" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="item" DataType="string" Value="totp" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="collection" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AddEmailtoMFAOptionsPartialCollection" TransformationMethod="AddParameterToStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="collection" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="item" DataType="string" Value="email" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="collection" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ConvertMFAOptionsPartialStringCollectionToCommaDelimiterString" TransformationMethod="StringJoin">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter DataType="string" Id="delimiter" Value="," />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptionsPartial" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="ConvertMFAOptionsPartialToStringCollection" TransformationMethod="StringSplit">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptionsPartial" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter DataType="string" Id="delimiter" Value="," />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CopyMFAOptionsToMFAOptionsPartial" TransformationMethod="CopyClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptions" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="MFAOptionsPartial" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="DoesAvailableMfaOptionsConatinSelectedMfa" TransformationMethod="StringCollectionContainsClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="MFAOptionsStringCollection" TransformationClaimType="collection" />
+          <InputClaim ClaimTypeReferenceId="MFAOptions_Verification" TransformationClaimType="item" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="ignoreCase" DataType="string" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="isSelectedMfaValid" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AssertSelectedMfaIsValid" TransformationMethod="AssertBooleanClaimIsEqualToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="isSelectedMfaValid" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="true" />
+        </InputParameters>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AutoselectMfaOptionPhoneIfAvailable" TransformationMethod="CompareBooleanClaimToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="smsMFASelected" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Phone" TransformationClaimType="compareResult"/>
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AutoselectMfaOptionTotpIfAvailable" TransformationMethod="CompareBooleanClaimToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="totpMFASelected" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_TOTP" TransformationClaimType="compareResult"/>
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="AutoselectMfaOptionEmailIfAvailable" TransformationMethod="CompareBooleanClaimToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="emailMFASelected" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Email" TransformationClaimType="compareResult"/>
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <!-- MFA Option Transforms ends-->
+
+      <!--TOTP Claim Transforms-->
+
+      <!-- Create a TOPT secret key-->
+      <ClaimsTransformation Id="CreateSecret" TransformationMethod="CreateOtpSecret">
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="secretKey" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <!-- Create the TOTP issuer name. The issuer name is your tenant name, such as "Contoso demo" -->
+      <ClaimsTransformation Id="CreateIssuer" TransformationMethod="CreateStringClaim">
+        <InputParameters>
+          <InputParameter Id="value" DataType="string" Value="{AuthenticatorIssuer}" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="issuer" TransformationClaimType="createdClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <!-- Create the TOTP URI label. The label is a combination of the totpIdentifier and the issuer name:
+           For example, Contoso demo:emily@fabrikam.com-->
+      <ClaimsTransformation Id="CreateUriLabel" TransformationMethod="FormatStringMultipleClaims">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="issuer" TransformationClaimType="inputClaim1" />
+          <InputClaim ClaimTypeReferenceId="totpIdentifier" TransformationClaimType="inputClaim2" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="stringFormat" DataType="string" Value="{0}:{1}" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="uriLabel" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <!-- Create the TOTP URI. The label is a combination of the CreateUriLabel and the secret key:
+      For example, otpauth://totp/Contoso%20demo:emily@fabrikam.com?secret=fay2lj7ynpntjgqa&issuer=Contoso+demo
+      This URI is later conver  ted into a QR code that is presented to the user-->
+      <ClaimsTransformation Id="CreateUriString" TransformationMethod="BuildUri">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="uriLabel" TransformationClaimType="path" />
+          <InputClaim ClaimTypeReferenceId="secretKey" TransformationClaimType="query.secret" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="scheme" DataType="string" Value="otpauth" />
+          <InputParameter Id="host" DataType="string" Value="totp" />
+          <InputParameter Id="query.issuer" DataType="string" Value="{AuthenticatorIssuer}" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="qrCodeContent" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <!-- Copy the signInName to the totpIdentifier -->
+      <ClaimsTransformation Id="SignInNameToTotpIdentifier" TransformationMethod="CopyClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="signInName" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="totpIdentifier" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <!-- Copy the email to the totpIdentifier -->
+      <ClaimsTransformation Id="EmailToTotpIdentifier" TransformationMethod="CopyClaim">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="totpIdentifier" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+
+      <ClaimsTransformation Id="CreateEmailFromOtherMails" TransformationMethod="GetSingleItemFromStringCollection">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="otherMails" TransformationClaimType="collection" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="email" TransformationClaimType="extractedItem" />
+        </OutputClaims>
+      </ClaimsTransformation>
+      <!--TOTP Claim Transforms Ends-->
+
     </ClaimsTransformations>
 
     <ContentDefinitions>
@@ -399,6 +1092,61 @@
           </Action>
         </Actions>
       </DisplayControl>
+
+      <DisplayControl Id="emailVerificationControl-Verify" UserInterfaceControlType="VerificationControl">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="email.readOnly" />
+          <InputClaim ClaimTypeReferenceId="email" />
+        </InputClaims>
+        <DisplayClaims>
+          <DisplayClaim ClaimTypeReferenceId="email.readOnly" Required="true" />
+          <DisplayClaim ClaimTypeReferenceId="verificationCode" ControlClaimType="VerificationCode" Required="true" />
+        </DisplayClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="email.readOnly" />
+        </OutputClaims>
+        <Actions>
+          <Action Id="SendCode">
+            <ValidationClaimsExchange>
+              <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-SendCode" />
+              <!-- <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="GenerateOtp" /> -->
+              <!-- <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="SendOtp" /> -->
+            </ValidationClaimsExchange>
+          </Action>
+          <Action Id="VerifyCode">
+            <ValidationClaimsExchange>
+              <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="AadSspr-VerifyCode" />
+              <!-- <ValidationClaimsExchangeTechnicalProfile TechnicalProfileReferenceId="VerifyOtp" /> -->
+            </ValidationClaimsExchange>
+          </Action>
+        </Actions>
+      </DisplayControl>
+
+      <!-- Render the authenticator apps icon. -->
+      <DisplayControl Id="authenticatorAppIconControl" UserInterfaceControlType="AuthenticatorAppIconControl" />
+
+      <!-- Render the QR code. It takes the URI (qrCodeContent) input claim and renders it as a QR code-->
+      <DisplayControl Id="totpQrCodeControl" UserInterfaceControlType="QrCodeControl">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="qrCodeContent" />
+        </InputClaims>
+        <DisplayClaims>
+          <DisplayClaim ClaimTypeReferenceId="qrCodeContent" ControlClaimType="QrCodeContent" />
+        </DisplayClaims>
+      </DisplayControl>
+
+      <!-- Render the TOTP information. It takes the totpIdentifier and the secretKey input claims and renders as a plan text-->
+      <DisplayControl Id="authenticatorInfoControl" UserInterfaceControlType="AuthenticatorInfoControl">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="totpIdentifier" />
+          <InputClaim ClaimTypeReferenceId="secretKey" />
+        </InputClaims>
+        <DisplayClaims>
+          <DisplayClaim ClaimTypeReferenceId="totpIdentifier" />
+          <DisplayClaim ClaimTypeReferenceId="secretKey" />
+        </DisplayClaims>
+      </DisplayControl>
+
     </DisplayControls>
 
   </BuildingBlocks>
@@ -433,6 +1181,33 @@
           </Metadata>
         </TechnicalProfile>
 
+        <TechnicalProfile Id="AAD-UserWriteMFAOptionsPartialUsingObjectId">
+          <Metadata>
+            <Item Key="Operation">Write</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+          </Metadata>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+          </InputClaims>
+          <PersistedClaims>
+            <PersistedClaim ClaimTypeReferenceId="objectId" />
+            <PersistedClaim ClaimTypeReferenceId="MFAOptionsPartial" PartnerClaimType="extension_MfaOptions" />
+          </PersistedClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartial" PartnerClaimType="extension_MfaOptions" />
+          </OutputClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserWritePhoneNumberAndMFAOptionPartialUsingObjectId">          
+          <PersistedClaims>            
+            <PersistedClaim ClaimTypeReferenceId="Verified.strongAuthenticationPhoneNumber" PartnerClaimType="strongAuthenticationPhoneNumber" />            
+          </PersistedClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-UserWriteMFAOptionsPartialUsingObjectId"/>          
+        </TechnicalProfile>
+
         <TechnicalProfile Id="AAD-UserWriteProfileUsingObjectId">
           <InputClaimsTransformations>
             <InputClaimsTransformation ReferenceId="CreateDisplayNameFromFirstNameAndLastName" />
@@ -454,8 +1229,20 @@
 
         <TechnicalProfile Id="AAD-UserReadUsingObjectId">
           <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
             <OutputClaim ClaimTypeReferenceId="companyName" PartnerClaimType="extension_companyName" />
+            <OutputClaim ClaimTypeReferenceId="MFAOptions" PartnerClaimType="extension_MfaOptions" />            
           </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-UserReadUsingEmailAddress">
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
+            <OutputClaim ClaimTypeReferenceId="MFAOptions" PartnerClaimType="extension_MfaOptions" />            
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CopySignInNameEmailToEmail" />
+          </OutputClaimsTransformations>
         </TechnicalProfile>
 
       </TechnicalProfiles>
@@ -766,7 +1553,7 @@
           <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
           <Metadata>
             <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
-            <Item Key="ContentDefinitionReferenceId">api.localaccountpasswordreset</Item>
+            <Item Key="ContentDefinitionReferenceId">api.localaccountpasswordreset.email</Item>
           </Metadata>
           <CryptographicKeys>
             <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
@@ -782,6 +1569,8 @@
             <OutputClaim ClaimTypeReferenceId="authenticationSource" />
 
             <OutputClaim ClaimTypeReferenceId="strongAuthenticationPhoneNumber" />
+            <OutputClaim ClaimTypeReferenceId="isActiveEmailSession" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+            <OutputClaim ClaimTypeReferenceId="MFAOptions" />
 
           </OutputClaims>
           <ValidationTechnicalProfiles>
@@ -819,6 +1608,7 @@
             <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
             <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="localAccountAuthentication" />
             <OutputClaim ClaimTypeReferenceId="newUser" />
+            <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
 
             <!-- Optional claims, to be collected from the user -->
             <OutputClaim ClaimTypeReferenceId="displayName"/>
@@ -904,6 +1694,33 @@
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
         </TechnicalProfile>
 
+        <TechnicalProfile Id="LocalAccount-VerifyEmail-NoSSO">
+          <DisplayName>verify email address</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+            <Item Key="ContentDefinitionReferenceId">api.registerMfa.VerifyEmail</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="CopyEmailtoEmailReadonly" />
+          </InputClaimsTransformations>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email"/>
+          </InputClaims>
+          <DisplayClaims>
+            <DisplayClaim DisplayControlReferenceId="emailVerificationControl-Verify" />
+          </DisplayClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="email"/>
+            <OutputClaim ClaimTypeReferenceId="isActiveEmailSession" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
       </TechnicalProfiles>
     </ClaimsProvider>
 
@@ -924,8 +1741,784 @@
           </OutputClaimsTransformations>
           <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
         </TechnicalProfile>
+
+        <TechnicalProfile Id="ValidateSelectedMfaOption">
+          <DisplayName>Validate Selected MfaOption</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="MFAOptions_Verification" />
+            <InputClaim ClaimTypeReferenceId="MFAOptionsStringCollection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptions_Verification" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="DoesAvailableMfaOptionsConatinSelectedMfa" />
+            <OutputClaimsTransformation ReferenceId="AssertSelectedMfaIsValid" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="MFA-Verify-AutoSelect">
+          <DisplayName>MFA Verify AutoSelect</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="emailMFASelected" />
+            <InputClaim ClaimTypeReferenceId="smsMFASelected" />
+            <InputClaim ClaimTypeReferenceId="totpMFASelected" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Phone" DefaultValue="false"/>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_TOTP" DefaultValue="false"/>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Email" DefaultValue="false"/>
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="AutoselectMfaOptionPhoneIfAvailable" />
+            <OutputClaimsTransformation ReferenceId="AutoselectMfaOptionTotpIfAvailable" />
+            <OutputClaimsTransformation ReferenceId="AutoselectMfaOptionEmailIfAvailable" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
       </TechnicalProfiles>
     </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>TOTP Claim providers</DisplayName>
+      <TechnicalProfiles>
+
+        <!-- Begin the TOTP verification process.
+              This technical profile is called right before the AzureMfa-VerifyOTP technical profile-->
+        <TechnicalProfile Id="AzureMfa-BeginVerifyOTP">
+          <DisplayName>Create Device</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureMfaProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="Operation">BeginVerifyOTP</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="secretKey" />
+            <InputClaim ClaimTypeReferenceId="objectId" />
+            <InputClaim ClaimTypeReferenceId="userPrincipalName" />
+          </InputClaims>
+        </TechnicalProfile>
+
+        <!-- Verify the TOTP verification process.
+              This technical profile is called immediately after the AzureMfa-BeginVerifyOTP technical profile-->
+        <TechnicalProfile Id="AzureMfa-VerifyOTP">
+          <DisplayName>Verify OTP</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureMfaProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="Operation">VerifyOTP</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="otpCode" />
+          </InputClaims>
+        </TechnicalProfile>
+
+        <!-- Check the number of devices available for the user.
+              If the number of available devices is zero it indicates the user hasn't enrolled yet -->
+        <TechnicalProfile Id="AzureMfa-GetAvailableDevices">
+          <DisplayName>Get Available Devices</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AzureMfaProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="Operation">GetAvailableDevices</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="userPrincipalName" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="numberOfAvailableDevices" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <!-- TOTP session manager-->
+        <TechnicalProfile Id="SM-MFA-TOTP">
+          <DisplayName>Session Mananagement Provider</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.SSO.DefaultSSOSessionProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <PersistedClaims>
+            <PersistedClaim ClaimTypeReferenceId="totpIdentifier" />
+            <PersistedClaim ClaimTypeReferenceId="issuer" />
+          </PersistedClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="EnableOTPAuthentication-NoSSO">
+          <IncludeTechnicalProfile ReferenceId="EnableOTPAuthentication" />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <!-- Self-asserted technical profile that asks the user to enroll to the TOTP MFA. The technical profile:
+                1) Creates the TOTP secret
+                2) Sets the issuer name and the URI
+                3) Renders the QR code and the authentication URI
+              -->
+        <TechnicalProfile Id="EnableOTPAuthentication">
+          <DisplayName>Sign up with Authenticator app</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted.totp.register</Item>
+            <Item Key="language.button_continue">Continue</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="CreateSecret" />
+            <InputClaimsTransformation ReferenceId="CreateIssuer" />
+            <InputClaimsTransformation ReferenceId="CreateUriLabel" />
+            <InputClaimsTransformation ReferenceId="CreateUriString" />
+          </InputClaimsTransformations>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="qrCodeContent" />
+            <InputClaim ClaimTypeReferenceId="secretKey" />
+          </InputClaims>
+          <DisplayClaims>
+            <DisplayClaim DisplayControlReferenceId="authenticatorAppIconControl" />
+            <DisplayClaim ClaimTypeReferenceId="QrCodeScanInstruction" />
+            <DisplayClaim DisplayControlReferenceId="totpQrCodeControl" />
+            <DisplayClaim DisplayControlReferenceId="authenticatorInfoControl" />
+
+            <DisplayClaim ClaimTypeReferenceId="otpCode" Required="true" />
+          </DisplayClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="objectId" />
+            <OutputClaim ClaimTypeReferenceId="secretKey" />
+
+            <OutputClaim ClaimTypeReferenceId="otpCode" Required="true" />
+
+          </OutputClaims>
+          <ValidationTechnicalProfiles>
+            <ValidationTechnicalProfile ReferenceId="AzureMfa-BeginVerifyOTP" />
+            <ValidationTechnicalProfile ReferenceId="AzureMfa-VerifyOTP" />
+          </ValidationTechnicalProfiles>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-MFA-TOTP" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="OTPVerification-NoSSO">
+          <IncludeTechnicalProfile ReferenceId="OTPVerification" />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <!-- Self-asserted technical profile that verifies the TOTP-->
+
+        <TechnicalProfile Id="OTPVerification">
+          <DisplayName>Sign in with Authenticator app</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted.totp.verify</Item>
+            <Item Key="language.button_continue">Verify</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="QrCodeVerifyInstruction" DefaultValue="To complete the authentication process, please enter the verification code from your authenticator app." />
+          </InputClaims>
+          <DisplayClaims>
+            <DisplayClaim ClaimTypeReferenceId="QrCodeVerifyInstruction" />
+            <DisplayClaim ClaimTypeReferenceId="otpCode" Required="true" />
+          </DisplayClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="objectId" />
+            <OutputClaim ClaimTypeReferenceId="otpCode" Required="true" />
+          </OutputClaims>
+          <ValidationTechnicalProfiles>
+            <ValidationTechnicalProfile ReferenceId="AzureMfa-BeginVerifyOTP" />
+            <ValidationTechnicalProfile ReferenceId="AzureMfa-VerifyOTP" />
+          </ValidationTechnicalProfiles>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-MFA-TOTP" />
+        </TechnicalProfile>
+
+        <!-- Set the number of devices to 0 (default value) -->
+        <TechnicalProfile Id="SetTotpDefaultValue">
+          <DisplayName>Set Totp Default Values</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="numberOfAvailableDevices" DefaultValue="0" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <!-- Copy the SignInName to the totpIdentifier -->
+        <TechnicalProfile Id="CreateTotpIdentifier-SignInName">
+          <DisplayName>Set Totp Default Values</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="totpIdentifier" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="SignInNameToTotpIdentifier" />
+          </OutputClaimsTransformations>
+        </TechnicalProfile>
+
+        <!-- Copy the Email to the totpIdentifier -->
+        <TechnicalProfile Id="CreateTotpIdentifier-Email">
+          <DisplayName>Set Totp Default Values</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="totpIdentifier" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="EmailToTotpIdentifier" />
+          </OutputClaimsTransformations>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="CreateTotpIdentifier-OtherMail">
+          <DisplayName>Set Totp Default Values</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="totpIdentifier" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CreateEmailFromOtherMails" />
+            <OutputClaimsTransformation ReferenceId="EmailToTotpIdentifier" />
+          </OutputClaimsTransformations>
+        </TechnicalProfile>
+
+        <!--end of TOTP-->
+      </TechnicalProfiles>
+    </ClaimsProvider>
+
+    <ClaimsProvider>
+      <DisplayName>Multi-Factor Authentication Technical profiles</DisplayName>
+      <TechnicalProfiles>
+
+        <TechnicalProfile Id="TP-EnforceMfaExecuted">
+          <DisplayName>TP-EnforceMfaExecuted</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="isActiveMfaSession-Any" DefaultValue="true" AlwaysUseDefaultValue="true" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="TP-AddTOTPToMFAOptionsPartialCollection">
+          <DisplayName>AddTOTPToMFAOptionsPartialCollection</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IncludeClaimResolvingInClaimsHandling">true</Item>
+          </Metadata>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="AddTOTPtoMFAOptionsPartialCollection" />
+            <InputClaimsTransformation ReferenceId="ConvertMFAOptionsPartialStringCollectionToCommaDelimiterString" />
+          </InputClaimsTransformations>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" />
+            <InputClaim ClaimTypeReferenceId="MFAOptionsPartial" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" />
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartial" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="TP-AddEmailToMFAOptionsPartialCollection">
+          <DisplayName>AddEmailToMFAOptionsPartialCollection</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IncludeClaimResolvingInClaimsHandling">true</Item>
+          </Metadata>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="AddEmailtoMFAOptionsPartialCollection" />
+            <InputClaimsTransformation ReferenceId="ConvertMFAOptionsPartialStringCollectionToCommaDelimiterString" />
+          </InputClaimsTransformations>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" />
+            <InputClaim ClaimTypeReferenceId="MFAOptionsPartial" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" />
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartial" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+         <TechnicalProfile Id="TP-AddSMSToMFAOptionsPartialCollection">
+          <DisplayName>AddSMSToMFAOptionsPartialCollection</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IncludeClaimResolvingInClaimsHandling">true</Item>
+          </Metadata>
+          <InputClaimsTransformations>
+            <InputClaimsTransformation ReferenceId="AddSMStoMFAOptionsPartialCollection" />
+            <InputClaimsTransformation ReferenceId="ConvertMFAOptionsPartialStringCollectionToCommaDelimiterString" />
+          </InputClaimsTransformations>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" />
+            <InputClaim ClaimTypeReferenceId="MFAOptionsPartial" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" />
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartial" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="TP-SetSmsMfaSelected">
+          <DisplayName>TP-SetSmsMfaSelected</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="smsMfaSelected" DefaultValue="true" AlwaysUseDefaultValue="true" />
+            <OutputClaim ClaimTypeReferenceId="isMFAConfigurationSetupFlow" DefaultValue="true" AlwaysUseDefaultValue="true" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="TP-SetTotpMfaSelected">
+          <DisplayName>TP-SetTotpMfaSelected</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="totpMfaSelected" DefaultValue="true" AlwaysUseDefaultValue="true" />
+            <OutputClaim ClaimTypeReferenceId="isMFAConfigurationSetupFlow" DefaultValue="true" AlwaysUseDefaultValue="true" />
+          </OutputClaims>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SelfAsserted-ShowMessage-MfaUpdateSuccessful">
+          <DisplayName>Get email</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+            <Item Key="setting.showCancelButton">false</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="userMessage" DefaultValue ="Your update has been made. We will now redirect you to the application." AlwaysUseDefaultValue="true"/>
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="userMessage" />
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="IncrementNumberOfRegisteredMfa">
+          <DisplayName>Set number Of registered Mfa default value</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="numberOfRegisteredMfa"/>
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="AutoIncrementNumberOfRegisteredMfa" />
+          </OutputClaimsTransformations>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetAvailableMfaActions-Add">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="SetAddToAvailableMfaActions" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetAvailableMfaActions-Update">
+          <DisplayName>SetAvailableMfaActions-Update</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="SetUpdateToAvailableMfaActions" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetAvailableMfaActions-Add-Update">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="SetAddToAvailableMfaActions" />
+            <OutputClaimsTransformation ReferenceId="SetUpdateToAvailableMfaActions" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetAvailableMfaActions-Add-Update-Remove">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="SetAddToAvailableMfaActions" />
+            <OutputClaimsTransformation ReferenceId="SetUpdateToAvailableMfaActions" />
+            <OutputClaimsTransformation ReferenceId="SetRemoveToAvailableMfaActions" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetAvailableMfaActions-Update-Remove">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_AvailableActions" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="SetUpdateToAvailableMfaActions" />
+            <OutputClaimsTransformation ReferenceId="SetRemoveToAvailableMfaActions" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetRegisteredMFADefaultValue">
+          <DisplayName>Set Number Of registered Mfa Default Value</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="zeroClaim" DefaultValue="0" AlwaysUseDefaultValue="true" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="numberOfRegisteredMfa" DefaultValue="0" />
+            <OutputClaim ClaimTypeReferenceId="smsMFASelected" DefaultValue="false" />
+            <OutputClaim ClaimTypeReferenceId="totpMFASelected" DefaultValue="false" />
+            <!-- <OutputClaim ClaimTypeReferenceId="emailMFASelected" DefaultValue="false" /> -->
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <!-- on page refresh, numberOfRegisteredMfa get messed up. Hence ensuring the value is reset to zero.   -->
+            <OutputClaimsTransformation ReferenceId="CopyZeroClaimToNumberOfRegisteredMfa" />
+          </OutputClaimsTransformations>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetChangeMfaAction-Add">
+          <DisplayName>Add</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">changeMfa_AvailableActions</Item>
+            <Item Key="ClaimValueOnWhichToEnable">add</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_Action" DefaultValue="add" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemExistenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetChangeMfaAction-Update">
+          <DisplayName>Update</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">changeMfa_AvailableActions</Item>
+            <Item Key="ClaimValueOnWhichToEnable">update</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_Action" DefaultValue="update" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemExistenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="SetChangeMfaAction-Remove">
+          <DisplayName>Remove</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">changeMfa_AvailableActions</Item>
+            <Item Key="ClaimValueOnWhichToEnable">remove</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="changeMfa_Action" DefaultValue="remove" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemExistenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="ChangeMfa-SetMfaOption-Phone">
+          <DisplayName>SMS / Call</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">MFAOptionsStringCollection</Item>
+            <Item Key="ClaimValueOnWhichToEnable">sms</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="Change_MFAOption_Phone" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemExistenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="ChangeMfa-SetMfaOption-Totp">
+          <DisplayName>Authenticator App</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">MFAOptionsStringCollection</Item>
+            <Item Key="ClaimValueOnWhichToEnable">totp</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="Change_MFAOption_TOTP" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemExistenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="ChangeMfa-SetMfaOption-Phone-IfAbsent">
+          <DisplayName>SMS / Call</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">MFAOptionsStringCollection</Item>
+            <Item Key="ClaimValueOnWhichToEnable">sms</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="Change_MFAOption_Phone" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemAbsenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="ChangeMfa-SetMfaOption-Totp-IfAbsent">
+          <DisplayName>Authenticator App</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">MFAOptionsStringCollection</Item>
+            <Item Key="ClaimValueOnWhichToEnable">totp</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="Change_MFAOption_TOTP" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemAbsenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="TP-SetMFASetupFlow">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="isMFAConfigurationSetupFlow" DefaultValue="true" AlwaysUseDefaultValue="true" />
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="TP-CopyMFAOptionsToMFAOptionsPartial">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="MFAOptions" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartial" />
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsPartialStringCollection" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CopyMFAOptionsToMFAOptionsPartial" />
+            <OutputClaimsTransformation ReferenceId="ConvertMFAOptionsPartialToStringCollection" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="RemovePhoneFromUserMfaOptions">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptions" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="ClearPhoneWithTrailingCommaFromUserMfaOptions" />
+            <OutputClaimsTransformation ReferenceId="ClearPhoneWithLeadingCommaFromUserMfaOptions" />
+            <OutputClaimsTransformation ReferenceId="ClearPhoneFromUserMfaOptions" />
+            <OutputClaimsTransformation ReferenceId="ConvertMFAOptionsToStringCollection" />
+            <OutputClaimsTransformation ReferenceId="ConvertMFAStringCollectionToCommaDelimiterString" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="RemoveTotpFromUserMfaOptions">
+          <DisplayName>Validate Member Hash</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptions" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="ClearTotpWithTrailingCommaFromUserMfaOptions" />
+            <OutputClaimsTransformation ReferenceId="ClearTotpWithLeadingCommaFromUserMfaOptions" />
+            <OutputClaimsTransformation ReferenceId="ClearTotpFromUserMfaOptions" />
+            <OutputClaimsTransformation ReferenceId="ConvertMFAOptionsToStringCollection" />
+            <OutputClaimsTransformation ReferenceId="ConvertMFAStringCollectionToCommaDelimiterString" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="ExtractRegisteredMfaFromMfaOptionsCollection">
+          <DisplayName>Extract Registered Mfa From Mfa Options Collection</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="MFAOptionsStringCollection" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="smsMFASelected" />
+            <OutputClaim ClaimTypeReferenceId="totpMFASelected" />
+            <OutputClaim ClaimTypeReferenceId="emailMFASelected" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CheckIfTOTPMFASelected" />
+            <OutputClaimsTransformation ReferenceId="CheckIfPhoneMFASelected" />
+            <OutputClaimsTransformation ReferenceId="CheckIfEmailMFASelected" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="GetRegisteredMfaOptionsCollection">
+          <DisplayName>GetRegisteredMfaOptionsCollection</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="MFAOptions" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptionsStringCollection" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="ConvertMFAOptionsToStringCollection" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="VerifyMFA-SetMfaOption-Phone">
+          <DisplayName>SMS / Call</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">MFAOptionsStringCollection</Item>
+            <Item Key="ClaimValueOnWhichToEnable">sms</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Phone" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemExistenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="VerifyMFA-SetMfaOption-Totp">
+          <DisplayName>Authenticator App</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ClaimTypeOnWhichToEnable">MFAOptionsStringCollection</Item>
+            <Item Key="ClaimValueOnWhichToEnable">totp</Item>
+          </Metadata>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_TOTP" DefaultValue="true" AlwaysUseDefaultValue="true"/>
+          </OutputClaims>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+          <EnabledForUserJourneys>OnItemExistenceInStringCollectionClaim</EnabledForUserJourneys>
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="MFA-Register-Select">
+          <DisplayName>App Factor</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted.mfa.choosemfa</Item>
+            <Item Key="setting.inputVerificationDelayTimeInMilliseconds">10</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <DisplayClaims>
+            <DisplayClaim ClaimTypeReferenceId="MFAOptions" Required="true" />
+          </DisplayClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptions" />
+            <OutputClaim ClaimTypeReferenceId="smsMFASelected" />
+            <OutputClaim ClaimTypeReferenceId="totpMFASelected" />
+            <OutputClaim ClaimTypeReferenceId="emailMFASelected" />
+            <OutputClaim ClaimTypeReferenceId="isMFAConfigurationSetupFlow" DefaultValue="true" AlwaysUseDefaultValue="true" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="CheckIfPhoneMFASelected" />
+            <OutputClaimsTransformation ReferenceId="CheckIfTOTPMFASelected" />
+            <OutputClaimsTransformation ReferenceId="CheckIfEmailMFASelected" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="MFA-Register-Select-NoSSO">
+          <DisplayName>App Factor</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <IncludeTechnicalProfile ReferenceId="MFA-Register-Select" />
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-ClearMfaUsingObjectId">
+          <Metadata>
+            <Item Key="Operation">DeleteClaims</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+            <Item Key="AllowGenerationOfClaimsWithNullValues">true</Item>
+          </Metadata>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+          </InputClaims>
+          <PersistedClaims>
+            <PersistedClaim ClaimTypeReferenceId="objectId" />
+            <PersistedClaim ClaimTypeReferenceId="strongAuthenticationPhoneNumber" />
+            <PersistedClaim ClaimTypeReferenceId="MFAOptions" PartnerClaimType="extension_MfaOptions" />
+          </PersistedClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="MFAOptions" PartnerClaimType="extension_MfaOptions" DefaultValue="" AlwaysUseDefaultValue="true" />
+          </OutputClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="AAD-WriteMfaOptionsUsingObjectId">
+          <Metadata>
+            <Item Key="Operation">Write</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+            <Item Key="AllowGenerationOfClaimsWithNullValues">true</Item>
+          </Metadata>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+          </InputClaims>
+          <PersistedClaims>
+            <PersistedClaim ClaimTypeReferenceId="objectId" />
+            <PersistedClaim ClaimTypeReferenceId="MFAOptions" PartnerClaimType="extension_MfaOptions" />
+          </PersistedClaims>
+          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+        </TechnicalProfile>
+
+        <TechnicalProfile Id="MFA-Verify-Select">
+          <DisplayName>Show Mfa Options</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="ContentDefinitionReferenceId">api.selfasserted.mfa.choosemfa</Item>
+            <Item Key="setting.showContinueButton">true</Item>
+            <Item Key="setting.showCancelButton">true</Item>
+            <Item Key="UserMessageIfClaimsTransformationBooleanValueIsNotEqual">The option you've selected is an invalid one.</Item>
+          </Metadata>
+          <IncludeInSso>false</IncludeInSso>
+          <InputClaimsTransformations>
+            <!-- <InputClaimsTransformation ReferenceId="CopyEmailtoMaskedEmail"/>
+            <InputClaimsTransformation ReferenceId="CopyPhoneNumberToMaskedPhoneNumber"/>
+            <InputClaimsTransformation ReferenceId="ConvertAvailableMfaOptionsCollectionToavailablemfaOptions"/> -->
+            <InputClaimsTransformation ReferenceId="CopyMfaOptionsToAvailableMfaOptions"/>
+          </InputClaimsTransformations>
+          <InputClaims>
+            <!-- <InputClaim ClaimTypeReferenceId="maskedEmail"/>
+            <InputClaim ClaimTypeReferenceId="maskedPhoneNumber"/> -->
+            <InputClaim ClaimTypeReferenceId="MFAOptionsStringCollection"/>
+            <InputClaim ClaimTypeReferenceId="availablemfaOptions"/>
+          </InputClaims>
+          <DisplayClaims>
+            <DisplayClaim ClaimTypeReferenceId="MFAOptions_Verification" Required="true"/>
+            <DisplayClaim ClaimTypeReferenceId="availablemfaOptions"/>
+
+            <!-- <DisplayClaim ClaimTypeReferenceId="maskedEmail"/>
+            <DisplayClaim ClaimTypeReferenceId="maskedPhoneNumber"/> -->
+          </DisplayClaims>
+          <OutputClaims>
+            <!-- <OutputClaim ClaimTypeReferenceId="availablemfaOptions"/>
+            <OutputClaim ClaimTypeReferenceId="mfaOptions"/> -->
+            <OutputClaim ClaimTypeReferenceId="MFAOptions_Verification"/>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Email" DefaultValue="false"/>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_Phone" DefaultValue="false"/>
+            <OutputClaim ClaimTypeReferenceId="Verify_MFAOption_TOTP" DefaultValue="false"/>
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="Verification-CheckIfEmailMFASelected" />
+            <OutputClaimsTransformation ReferenceId="Verification-CheckIfPhoneMFASelected" />
+            <OutputClaimsTransformation ReferenceId="Verification-CheckIfTOTPMFASelected" />
+          </OutputClaimsTransformations>
+          <ValidationTechnicalProfiles>
+            <ValidationTechnicalProfile ReferenceId="ValidateSelectedMfaOption" />
+          </ValidationTechnicalProfiles>
+        </TechnicalProfile>
+
+      </TechnicalProfiles>
+    </ClaimsProvider>    
 
     <ClaimsProvider>
       <DisplayName>One time password technical profiles</DisplayName>
@@ -1109,7 +2702,7 @@
         <!-- Show self-asserted page only if the directory does not have the user account already (i.e. we do not have an objectId).
             This can only happen when authentication happened using a social IDP. If local account was created or authentication done
             using ESTS in step 2, then an user account must exist in the directory by this time. -->
-        <OrchestrationStep Order="9" Type="ClaimsExchange">
+        <!-- <OrchestrationStep Order="9" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>objectId</Value>
@@ -1119,11 +2712,11 @@
           <ClaimsExchanges>
             <ClaimsExchange Id="SelfAsserted-Social" TechnicalProfileReferenceId="SelfAsserted-Social" />
           </ClaimsExchanges>
-        </OrchestrationStep>
+        </OrchestrationStep> -->
 
         <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent
             in the token. -->
-        <OrchestrationStep Order="10" Type="ClaimsExchange">
+        <OrchestrationStep Order="9" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
               <Value>authenticationSource</Value>
@@ -1151,7 +2744,7 @@
             </ClaimsExchanges>
           </OrchestrationStep>-->
 
-        <OrchestrationStep Order="11" Type="InvokeSubJourney">
+        <OrchestrationStep Order="10" Type="InvokeSubJourney">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>objectIdFromSession</Value>
@@ -1172,7 +2765,29 @@
           </JourneyList>
         </OrchestrationStep>
 
-        <!-- Track that the mutifactor authentication step is initiated -->
+        <!-- Register MFA if not configured before [mfaoptions is empty] - applicable for sign up and sign in-->
+
+        <OrchestrationStep Order="11" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMfaSession-Any</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectIdFromSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>MFAOptions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="EnforceMFA" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!--<!~~ Track that the mutifactor authentication step is initiated ~~>
         <OrchestrationStep Order="12" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
@@ -1185,18 +2800,18 @@
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <!-- Phone verification: If MFA is not required, the next three steps (#16-#18) should be removed.
-               This step checks whether there's a phone number on record,  for the user. If found, then the user is challenged to verify it. -->
+        <!~~ Phone verification: If MFA is not required, the next three steps (#16-#18) should be removed.
+               This step checks whether there's a phone number on record,  for the user. If found, then the user is challenged to verify it. ~~>
         <OrchestrationStep Order="13" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>isActiveMFASession</Value>
               <Action>SkipThisOrchestrationStep</Action>
             </Precondition>
-            <!-- <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+            <!~~ <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
                 <Value>strongAuthenticationPhoneNumber</Value>
                 <Action>SkipThisOrchestrationStep</Action>
-              </Precondition> -->
+              </Precondition> ~~>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>isPasswordResetFlow</Value>
               <Action>SkipThisOrchestrationStep</Action>
@@ -1207,7 +2822,7 @@
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <!-- Track that the mutifactor authentication step is completed -->
+        <!~~ Track that the mutifactor authentication step is completed ~~>
         <OrchestrationStep Order="14" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
@@ -1218,12 +2833,12 @@
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
           </ClaimsExchanges>
-        </OrchestrationStep>
+        </OrchestrationStep>-->
 
         <!-- Save MFA phone number: The precondition verifies whether the user provided a new number in the
                previous step. If so, then the phone number is stored in the directory for future authentication
                requests. -->
-        <OrchestrationStep Order="15" Type="ClaimsExchange">
+        <OrchestrationStep Order="12" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
               <Value>newPhoneNumberEntered</Value>
@@ -1235,10 +2850,10 @@
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="16" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+        <OrchestrationStep Order="13" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
 
         <!-- Track that we have successfully sent a token -->
-        <OrchestrationStep Order="17" Type="ClaimsExchange">
+        <OrchestrationStep Order="14" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
           </ClaimsExchanges>
@@ -1269,9 +2884,15 @@
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
           </ClaimsExchanges>
+        </OrchestrationStep>        
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="4" Type="InvokeSubJourney">
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
               <Value>objectIdFromSession</Value>
@@ -1292,56 +2913,62 @@
           </JourneyList>
         </OrchestrationStep>
 
-        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="6" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMfaSession-Any</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="EnforceMFA" />
+          </JourneyList>
+        </OrchestrationStep>
+
+       <!-- <!~~ Track that the mutifactor authentication step is initiated ~~>
         <OrchestrationStep Order="5" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="6" Type="ClaimsExchange">
+        <!~~ <OrchestrationStep Order="6" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
           </ClaimsExchanges>
-        </OrchestrationStep>
+        </OrchestrationStep> ~~>        
 
-        <!-- Track that the mutifactor authentication step is completed -->
+        <!~~ Track that the mutifactor authentication step is completed ~~>
         <OrchestrationStep Order="7" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
           </ClaimsExchanges>
-        </OrchestrationStep>
+        </OrchestrationStep>-->
 
         <!-- Track that the password reset flow is started-->
-        <OrchestrationStep Order="8" Type="ClaimsExchange">
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackPasswordResetInitiate" TechnicalProfileReferenceId="AzureInsights-PasswordResetInitiate" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="9" Type="ClaimsExchange">
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
           <ClaimsExchanges>
-            <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
+            <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId-NoSSO" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
         <!-- Track that the password reset flow is completed-->
-        <OrchestrationStep Order="10" Type="ClaimsExchange">
+        <OrchestrationStep Order="9" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="11" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-
-        <OrchestrationStep Order="12" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+        <OrchestrationStep Order="10" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
 
         <!-- Track that we have successfully sent a token -->
-        <OrchestrationStep Order="13" Type="ClaimsExchange">
+        <OrchestrationStep Order="11" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
           </ClaimsExchanges>
@@ -1450,54 +3077,197 @@
           </JourneyList>
         </OrchestrationStep>
 
-        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="9" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMfaSession-Any</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="EnforceMFA" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!--<!~~ Track that the mutifactor authentication step is initiated ~~>
         <OrchestrationStep Order="9" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <!-- If the user ever stepped up to use 2FA, profile update must verify this because the user will be able to change
+        <!~~ If the user ever stepped up to use 2FA, profile update must verify this because the user will be able to change
             their sign in email address or strong authentication email here. This guards against scenarios where a user's
             password is stolen, the attacker can change the email addresses leaving no way for the user to recover their account.
-            By requiring 2FA, stolen passwords cannot be used to take over the account completely. -->
+            By requiring 2FA, stolen passwords cannot be used to take over the account completely. ~~>
         <OrchestrationStep Order="10" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="PhoneFactor" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <!-- Track that the mutifactor authentication step is completed -->
+        <!~~ Track that the mutifactor authentication step is completed ~~>
         <OrchestrationStep Order="11" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
           </ClaimsExchanges>
-        </OrchestrationStep>
+        </OrchestrationStep>-->
 
         <!-- Track that the profile edit step is initiated -->
-        <OrchestrationStep Order="12" Type="ClaimsExchange">
+        <OrchestrationStep Order="10" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackProfileEditInitiate" TechnicalProfileReferenceId="AzureInsights-ProfileEditInitiate" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="13" Type="ClaimsExchange">
+        <OrchestrationStep Order="11" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
         <!-- Track that the profile edit step is completed -->
-        <OrchestrationStep Order="14" Type="ClaimsExchange">
+        <OrchestrationStep Order="12" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackProfileEditComplete" TechnicalProfileReferenceId="AzureInsights-ProfileEditComplete" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="15" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+        <OrchestrationStep Order="13" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
 
         <!-- Track that we have successfully sent a token -->
-        <OrchestrationStep Order="16" Type="ClaimsExchange">
+        <OrchestrationStep Order="14" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+
+    <UserJourney Id="ChangeMfa-UserJourney">
+      <OrchestrationSteps>
+
+        <!-- Track that we have received an authentication request -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationRequest" TechnicalProfileReferenceId="AzureInsights-AuthenticationRequest" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="LocalAccountSigninEmailExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationInitiate" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>selectedIdp</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackIdpAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-IdpAuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!--<OrchestrationStep Order="6" Type="ClaimsExchange">
+            <Preconditions>
+              <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+                <Value>authenticationSource</Value>
+                <Value>localAccountAuthentication</Value>
+                <Action>SkipThisOrchestrationStep</Action>
+              </Precondition>
+            </Preconditions>
+            <ClaimsExchanges>
+              <ClaimsExchange Id="AADUserRead" TechnicalProfileReferenceId="AAD-UserReadUsingAlternativeSecurityId" />
+            </ClaimsExchanges>
+          </OrchestrationStep>-->
+
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the authentication step is completed -->
+        <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackAuthenticationComplete" TechnicalProfileReferenceId="AzureInsights-AuthenticationComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="8" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>objectIdFromSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>authenticationSource</Value>
+              <Value>socialIdpAuthentication</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="DFP-Verification" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="9" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMfaSession-Any</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="EnforceMFA" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="10" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="ChangeMFA-SubJourney" />
+          </JourneyList>
+        </OrchestrationStep>        
+
+        <OrchestrationStep Order="11" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+
+        <!-- Track that we have successfully sent a token -->
+        <OrchestrationStep Order="12" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackTokenIssued" TechnicalProfileReferenceId="AzureInsights-TokenIssued" />
           </ClaimsExchanges>
@@ -1551,7 +3321,19 @@
           </JourneyList>
         </OrchestrationStep>
 
-        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="3" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveMfaSession-Any</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="EnforceMFA" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!--<!~~ Track that the mutifactor authentication step is initiated ~~>
         <OrchestrationStep Order="3" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
@@ -1570,29 +3352,29 @@
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <!-- Track that the mutifactor authentication step is completed -->
+        <!~~ Track that the mutifactor authentication step is completed ~~>
         <OrchestrationStep Order="5" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
           </ClaimsExchanges>
-        </OrchestrationStep>
+        </OrchestrationStep>-->
 
         <!-- Track that the password reset flow is started-->
-        <OrchestrationStep Order="6" Type="ClaimsExchange">
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackPasswordResetInitiate" TechnicalProfileReferenceId="AzureInsights-PasswordResetInitiate" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
         <!--Sample: Collect and persist a new password. Run this step only when user resets the password-->
-        <OrchestrationStep Order="7" Type="ClaimsExchange">
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="NewCredentials" TechnicalProfileReferenceId="LocalAccountWritePasswordUsingObjectId" />
           </ClaimsExchanges>
         </OrchestrationStep>
 
         <!-- Track that the password reset flow is completed-->
-        <OrchestrationStep Order="8" Type="ClaimsExchange">
+        <OrchestrationStep Order="6" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="TrackPasswordResetComplete" TechnicalProfileReferenceId="AzureInsights-PasswordResetComplete" />
           </ClaimsExchanges>
@@ -1769,7 +3551,32 @@
           </ClaimsExchanges>
         </OrchestrationStep>
 
-        <OrchestrationStep Order="9" Type="ClaimsExchange">
+        <OrchestrationStep Order="9" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>objectId</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isSignupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>dfp_merchantRuleDecision</Value>
+              <Value>Challenge</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="EnforceMFA" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- <OrchestrationStep Order="9" Type="ClaimsExchange">
           <Preconditions>
             <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
               <Value>objectId</Value>
@@ -1792,7 +3599,7 @@
           <ClaimsExchanges>
             <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify" />
           </ClaimsExchanges>
-        </OrchestrationStep>
+        </OrchestrationStep> -->
 
         <OrchestrationStep Order="10" Type="ClaimsExchange">
           <Preconditions>
@@ -1818,6 +3625,978 @@
             <ClaimsExchange Id="Dfp-LoginAccountStatus-Approved-AfterChallenge" TechnicalProfileReferenceId="RestApi-DFP-LoginAccountStatus-Approved" />
           </ClaimsExchanges>
         </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="EnforceMFA" Type="Call">
+      <OrchestrationSteps>
+        <!-- Track that the mutifactor authentication step is initiated -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-MultifactorInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>MFAOptions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <!--To skip MFA registration during password reset flow -->
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isPasswordResetFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="RegisterMFA-SubJourney" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>MFAOptions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="ChallengeMFA-SubJourney" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetisActiveMfaSessionAnyExchange" TechnicalProfileReferenceId="TP-EnforceMfaExecuted" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Track that the mutifactor authentication step is completed -->
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-MultifactorComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="RegisterMFA-SubJourney" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveEmailSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="VerifyEmailBeforeSettingNewMfa" TechnicalProfileReferenceId="LocalAccount-VerifyEmail-NoSSO" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="MFARegisterSelect" TechnicalProfileReferenceId="MFA-Register-Select" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>totpMFASelected</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>totpMFASelected</Value>
+              <Value>False</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="TotpFactor-RegisterInput-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>smsMFASelected</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>smsMFASelected</Value>
+              <Value>False</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="MFA-SMS-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- <OrchestrationStep Order="4" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>emailMFASelected</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>emailMFASelected</Value>
+              <Value>False</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="Email-RegisterInput-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep> -->
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="ChallengeMFA-SubJourney" Type="Call">
+      <OrchestrationSteps>
+
+        <!-- <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RegisteredMfaOptionsCollectionExchange" TechnicalProfileReferenceId="GetRegisteredMfaOptionsCollection" />
+          </ClaimsExchanges>
+        </OrchestrationStep> -->
+
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="IdentifyNumberOfRegisteredMfaActions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>1</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="MFAVerifyAutoSelect" TechnicalProfileReferenceId="MFA-Verify-AutoSelect" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>1</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="MFAVerifySelect" TechnicalProfileReferenceId="MFA-Verify-Select" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- <OrchestrationStep Order="2" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="TotpMfaExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="PhoneMfaExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TotpMfaExchange" TechnicalProfileReferenceId="VerifyMFA-SetMfaOption-Totp" />
+            <ClaimsExchange Id="PhoneMfaExchange" TechnicalProfileReferenceId="VerifyMFA-SetMfaOption-Phone" />
+          </ClaimsExchanges>
+        </OrchestrationStep> -->
+
+        <OrchestrationStep Order="4" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Verify_MFAOption_TOTP</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Verify_MFAOption_TOTP</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="MFA-TOTP-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Verify_MFAOption_Phone</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Verify_MFAOption_Phone</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="MFA-SMS-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Verify_MFAOption_Email</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Verify_MFAOption_Email</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isActiveEmailSession</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="Email-Mfa-NoSSO" TechnicalProfileReferenceId="LocalAccount-VerifyEmail-NoSSO" />
+          </ClaimsExchanges>
+        </OrchestrationStep> -->
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="IdentifyNumberOfRegisteredMfaActions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetRegisteredMFADefaultValue" TechnicalProfileReferenceId="SetRegisteredMFADefaultValue" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- If user has any registered mfa, Get it as collection-->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>MFAOptions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RegisteredMfaOptionsCollectionExchange" TechnicalProfileReferenceId="GetRegisteredMfaOptionsCollection" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Extract each registered mfa from the collection-->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>MFAOptions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="ExtractRegisteredMfaExchange" TechnicalProfileReferenceId="ExtractRegisteredMfaFromMfaOptionsCollection" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Calculate numberOfRegisteredMfa -->
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>totpMFASelected</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="IncrementNumberOfRegisteredMfa-Totp" TechnicalProfileReferenceId="IncrementNumberOfRegisteredMfa" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>emailMFASelected</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="IncrementNumberOfRegisteredMfa-Email" TechnicalProfileReferenceId="IncrementNumberOfRegisteredMfa" />
+          </ClaimsExchanges>
+        </OrchestrationStep> -->
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>smsMFASelected</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="IncrementNumberOfRegisteredMfa-Phone" TechnicalProfileReferenceId="IncrementNumberOfRegisteredMfa" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="TotpFactor-InputOrVerify-NoSSO" Type="Call">
+      <OrchestrationSteps>
+
+        <!-- Set the required claims numberOfAvailableDevices and totpIdentifier-->
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="SetTotpInitialValue" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- If current user is not a new one (this is a sign-in flow, and not sign-up),
+             check the number of available devices. -->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <!-- <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>newUser</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions> -->
+          <ClaimsExchanges>
+            <ClaimsExchange Id="CheckAvailableDevices" TechnicalProfileReferenceId="AzureMfa-GetAvailableDevices" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- If the number of available devices is zero (user hasn't enrolled before),
+            render the TOTP enrollment page to scan the QR code that starts the enrollment process -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfAvailableDevices</Value>
+              <Value>0</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AuthenticatorForSignUp" TechnicalProfileReferenceId="EnableOTPAuthentication-NoSSO" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- If the number of available devices is zero (user hasn't enrolled before),
+             render the TOTP verification page.  -->
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>numberOfAvailableDevices</Value>
+              <Value>0</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AuthenticatorForSignIn" TechnicalProfileReferenceId="OTPVerification-NoSSO" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="TotpFactor-RegisterInput-NoSSO" Type="Call">
+      <OrchestrationSteps>
+
+        <!-- Set the required claims numberOfAvailableDevices and totpIdentifier-->
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="SetTotpInitialValue" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- If the number of available devices is zero (user hasn't enrolled before),
+            render the TOTP enrollment page to scan the QR code that starts the enrollment process -->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AuthenticatorForSignUp" TechnicalProfileReferenceId="EnableOTPAuthentication-NoSSO" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="ClaimTransformationExchange-AddTOTPToMFAOptionsPartialCollection" TechnicalProfileReferenceId="TP-AddTOTPToMFAOptionsPartialCollection" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserWriteTOTPMFAOptionsPartialUsingObjectId" TechnicalProfileReferenceId="AAD-UserWriteMFAOptionsPartialUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <!-- <SubJourney Id="Email-RegisterInput-NoSSO" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="ClaimTransformationExchange-AddEmailToMFAOptionsPartialCollection" TechnicalProfileReferenceId="TP-AddEmailToMFAOptionsPartialCollection" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserWriteTOTPMFAOptionsPartialUsingObjectId" TechnicalProfileReferenceId="AAD-UserWriteMFAOptionsPartialUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney> -->
+
+    <SubJourney Id="MFA-TOTP-NoSSO" Type="Call">
+      <OrchestrationSteps>
+        <!-- Call the TOTP enrollment ub journey. If user already enrolled the sub journey will not ask the user to enroll -->
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="TotpFactor-InputOrVerify-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="ClaimTransformationExchange-AddTOTPToMFAOptionsPartialCollection" TechnicalProfileReferenceId="TP-AddTOTPToMFAOptionsPartialCollection" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserWriteTOTPMFAOptionsPartialUsingObjectId" TechnicalProfileReferenceId="AAD-UserWriteMFAOptionsPartialUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+
+    </SubJourney>
+
+    <SubJourney Id="SetTotpInitialValue" Type="Call">
+      <OrchestrationSteps>
+
+        <!-- If number of available device claim not exists, set the value to 0-->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>numberOfAvailableDevices</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetTotpDefaultValue" TechnicalProfileReferenceId="SetTotpDefaultValue" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- The following orchestration steps try to get the user identifier for different
+             type of authentication, such as local and social account.-->
+
+        <!-- Get the identifier from email-->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>totpIdentifier</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>email</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetTotpIdentifierAsEmail" TechnicalProfileReferenceId="CreateTotpIdentifier-Email" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Get the identifier from otherMails-->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>totpIdentifier</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>otherMails</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetTotpIdentifierAsEmailFromOtherMail" TechnicalProfileReferenceId="CreateTotpIdentifier-OtherMail" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- Get the identifier from local account sign-in name-->
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>totpIdentifier</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>signInName</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetTotpIdentifierAsSignInName" TechnicalProfileReferenceId="CreateTotpIdentifier-SignInName" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="MFA-SMS-NoSSO" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Value>False</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PhoneFactor-Input" TechnicalProfileReferenceId="PhoneFactor-InputOnly-NoSSO" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="PhoneFactor-Verify" TechnicalProfileReferenceId="PhoneFactor-InputOrVerify-NoSSO" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>newPhoneNumberEntered</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="ClaimTransformationExchange-AddSMSToMFAOptionsPartialCollection" TechnicalProfileReferenceId="TP-AddSMSToMFAOptionsPartialCollection" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>newPhoneNumberEntered</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isMFAConfigurationSetupFlow</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserWritePhoneAndMFAOptionPartialWithObjectId" TechnicalProfileReferenceId="AAD-UserWritePhoneNumberAndMFAOptionPartialUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="SetMfaActions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="IdentifyNumberOfRegisteredMfaActions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <!-- if numberOfRegisteredMfa=0, Available mfa action is only 'Add' -->
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>0</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetAvailableMfaActions-Add" TechnicalProfileReferenceId="SetAvailableMfaActions-Add" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- if numberOfRegisteredMfa=1 Available mfa actions are 'Add/Update' -->
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>1</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetAvailableMfaActions-Add-Update" TechnicalProfileReferenceId="SetAvailableMfaActions-Add-Update" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- if numberOfRegisteredMfa=2, Available mfa actions are 'Update/Remove' -->
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>numberOfRegisteredMfa</Value>
+              <Value>2</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SetAvailableMfaActions-Update-Remove" TechnicalProfileReferenceId="SetAvailableMfaActions-Update-Remove" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="ChangeMFA-SubJourney" Type="Call">
+      <OrchestrationSteps>
+
+        <!-- Track that the change mfa step is initiated -->
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackChangeMultifactorInitiate" TechnicalProfileReferenceId="AzureInsights-ChangeMultifactorInitiate" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="SetMfaActions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.selector">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>changeMfa_AvailableActions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsProviderSelections DisplayOption="ShowSingleProvider">
+            <ClaimsProviderSelection TargetClaimsExchangeId="MfaActionExchange-Add" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="MfaActionExchange-Update" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="MfaActionExchange-Remove" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.selector">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>changeMfa_AvailableActions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="MfaActionExchange-Add" TechnicalProfileReferenceId="SetChangeMfaAction-Add" />
+            <ClaimsExchange Id="MfaActionExchange-Update" TechnicalProfileReferenceId="SetChangeMfaAction-Update" />
+            <ClaimsExchange Id="MfaActionExchange-Remove" TechnicalProfileReferenceId="SetChangeMfaAction-Remove" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>changeMfa_Action</Value>
+              <Value>remove</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="RemoveRegisteredMfaOptions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="6" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>changeMfa_Action</Value>
+              <Value>add</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="RegisterNewMfaOptions" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="7" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>changeMfa_Action</Value>
+              <Value>update</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="UpdateRegisteredMfaOptions" />
+          </JourneyList>
+        </OrchestrationStep>        
+
+        <!-- Track that the change mfa step is completed -->
+        <OrchestrationStep Order="8" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TrackChangeMultifactorComplete" TechnicalProfileReferenceId="AzureInsights-ChangeMultifactorComplete" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <!-- <OrchestrationStep Order="7" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="SelfAssertedShowMfaSuccessfulExchange" TechnicalProfileReferenceId="SelfAsserted-ShowMessage-MfaUpdateSuccessful" />
+          </ClaimsExchanges>
+        </OrchestrationStep> -->
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="RegisterNewMfaOptions-SetClaimsProvider-TotpSms" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.add">
+          <ClaimsProviderSelections DisplayOption="ShowSingleProvider">
+            <ClaimsProviderSelection TargetClaimsExchangeId="TotpMfaExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="PhoneMfaExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.add">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TotpMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Totp-IfAbsent" />
+            <ClaimsExchange Id="PhoneMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Phone-IfAbsent" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="RegisterNewMfaOptions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="InvokeSubJourney">
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="RegisterNewMfaOptions-SetClaimsProvider-TotpSms" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-SetMFASetupFlowExchange" TechnicalProfileReferenceId="TP-SetMFASetupFlow" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>MFAOptions</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-CopyMFAOptionsToMFAOptionsPartialExchange" TechnicalProfileReferenceId="TP-CopyMFAOptionsToMFAOptionsPartial" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="MFA-SMS-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="TotpFactor-RegisterInput-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="RemoveRegisteredMfaOptions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.remove">
+          <ClaimsProviderSelections>
+            <ClaimsProviderSelection TargetClaimsExchangeId="TotpMfaExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="PhoneMfaExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.remove">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TotpMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Totp" />
+            <ClaimsExchange Id="PhoneMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Phone" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RemovePhoneFromUserMfaOptionsExchange" TechnicalProfileReferenceId="RemovePhoneFromUserMfaOptions" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RemoveTotpFromUserMfaOptionsExchange" TechnicalProfileReferenceId="RemoveTotpFromUserMfaOptions" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="AADWriteUserMfaOptionsByObjectIdExchange" TechnicalProfileReferenceId="AAD-WriteMfaOptionsUsingObjectId" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+      </OrchestrationSteps>
+    </SubJourney>
+
+    <SubJourney Id="UpdateRegisteredMfaOptions" Type="Call">
+      <OrchestrationSteps>
+
+        <OrchestrationStep Order="1" Type="ClaimsProviderSelection" ContentDefinitionReferenceId="api.idpselections.mfa.update">
+          <ClaimsProviderSelections DisplayOption="ShowSingleProvider">
+            <ClaimsProviderSelection TargetClaimsExchangeId="TotpMfaExchange" />
+            <ClaimsProviderSelection TargetClaimsExchangeId="PhoneMfaExchange" />
+          </ClaimsProviderSelections>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="2" Type="ClaimsExchange" ContentDefinitionReferenceId="api.idpselections.mfa.update">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TotpMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Totp" />
+            <ClaimsExchange Id="PhoneMfaExchange" TechnicalProfileReferenceId="ChangeMfa-SetMfaOption-Phone" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="3" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-SetMFASetupFlowExchange" TechnicalProfileReferenceId="TP-SetMFASetupFlow" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="4" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="TP-CopyMFAOptionsToMFAOptionsPartialExchange" TechnicalProfileReferenceId="TP-CopyMFAOptionsToMFAOptionsPartial" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="5" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_Phone</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="MFA-SMS-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
+        <OrchestrationStep Order="6" Type="InvokeSubJourney">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="false">
+              <Value>Change_MFAOption_TOTP</Value>
+              <Value>True</Value>
+              <Action>SkipThisOrchestrationStep</Action>
+            </Precondition>
+          </Preconditions>
+          <JourneyList>
+            <Candidate SubJourneyReferenceId="TotpFactor-RegisterInput-NoSSO" />
+          </JourneyList>
+        </OrchestrationStep>
+
       </OrchestrationSteps>
     </SubJourney>
 
